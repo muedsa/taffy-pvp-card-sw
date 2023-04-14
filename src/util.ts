@@ -11,8 +11,11 @@ import {
   characterMasterElementDamageProp,
 } from "./data/characters";
 import { loc } from "./data/loc";
-import { FightProp } from "../types";
+import { FightProp } from "./types";
 import { weapons } from "./data/weapons";
+import { reliquaries } from "./data/reliquaries";
+import { reliquarySet } from "./data/reliquary-set";
+import { reliquariesLoc } from "./data/reliquaries-loc";
 
 const basePath = resolve(__dirname, "..");
 
@@ -128,4 +131,17 @@ export function getWeaponImagePath(weaponId: number): string {
 export function getWeaponName(weaponId: number, lang: string): string {
   const nameTextMapHash = weapons[weaponId].nameTextMapHash;
   return getLoc(nameTextMapHash.toString(), lang);
+}
+
+export function getReliquarySetId(reliquaryId: number): number | undefined {
+  return reliquaries[reliquaryId]?.setId;
+}
+
+export function getReliquariesLoc(key: string, lang: string): string {
+  return reliquariesLoc[lang][key];
+}
+
+export function getReliquarySetName(setId: number, lang: string): string {
+  const nameTextMapHash = reliquarySet[setId].nameTextMapHash;
+  return getReliquariesLoc(nameTextMapHash.toString(), lang);
 }

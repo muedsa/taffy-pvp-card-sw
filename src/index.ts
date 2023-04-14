@@ -12,7 +12,7 @@ import {
   Reliquary,
   FightProp,
   Weapon,
-} from "../types";
+} from "./types";
 import {
   getAssetFontPath,
   getBgColor,
@@ -27,6 +27,8 @@ import {
   getFightPropText,
   getWeaponImagePath,
   getWeaponName,
+  getReliquarySetId,
+  getReliquarySetName,
 } from "./util";
 import {
   loadImageAndDraw,
@@ -140,6 +142,12 @@ const reliquarySubPropTextFontSize = reliquarySubPropImageSize - contentMragin;
 const reliquarySubPropTextFontFamily = fontFamily;
 const reliquarySubPropTextFontColor = "#ffffff";
 
+const reliquarySetX = reliquaryX + reliquaryInfoWidth + contentMragin;
+const reliquarySetY = reliquaryY + reliquaryInfoHeight * 2 + contentMragin * 2;
+const reliquarySetTextFontSize = reliquarySubPropImageSize - contentMragin;
+const reliquarySetTextFontFamily = fontFamily;
+const reliquarySetTextFontColor = "#ffffff";
+
 const weaponImageSize = reliquaryInfoHeight;
 const weaponNameTextFontSize = characterPropTextFontSize;
 
@@ -194,7 +202,7 @@ export async function generateCard(
   initBackground(ctx, character);
   await drawCharacter(ctx, character, config);
   await drawCharacterProps(ctx, config, character);
-  await drawReliquaries(ctx, character.reliquaries, character.id);
+  await drawReliquaries(ctx, character.reliquaries, character.id, config.lang);
   await drawWeapon(ctx, character.weapon, config.lang);
   return canvas;
 }
@@ -386,25 +394,53 @@ async function drawCharacterProp(
 
 async function drawReliquaries(
   ctx: SKRSContext2D,
-  reliquarys: ReliquarySlots,
-  avatarId: number
+  reliquaries: ReliquarySlots,
+  avatarId: number,
+  lang: string
 ) {
   let postion = 0;
-  if (reliquarys.flower) {
-    await drawReliquary(ctx, reliquarys.flower, avatarId, postion++);
+  const setNumMap: Map<number, number> = new Map();
+  if (reliquaries.flower) {
+    await drawReliquary(ctx, reliquaries.flower, avatarId, postion++);
+    countSetNum(setNumMap, reliquaries.flower.id);
   }
-  if (reliquarys.feather) {
-    await drawReliquary(ctx, reliquarys.feather, avatarId, postion++);
+  if (reliquaries.feather) {
+    await drawReliquary(ctx, reliquaries.feather, avatarId, postion++);
+    countSetNum(setNumMap, reliquaries.feather.id);
   }
-  if (reliquarys.sands) {
-    await drawReliquary(ctx, reliquarys.sands, avatarId, postion++);
+  if (reliquaries.sands) {
+    await drawReliquary(ctx, reliquaries.sands, avatarId, postion++);
+    countSetNum(setNumMap, reliquaries.sands.id);
   }
-  if (reliquarys.goblet) {
-    await drawReliquary(ctx, reliquarys.goblet, avatarId, postion++);
+  if (reliquaries.goblet) {
+    await drawReliquary(ctx, reliquaries.goblet, avatarId, postion++);
+    countSetNum(setNumMap, reliquaries.goblet.id);
   }
-  if (reliquarys.circlet) {
-    await drawReliquary(ctx, reliquarys.circlet, avatarId, postion++);
+  if (reliquaries.circlet) {
+    await drawReliquary(ctx, reliquaries.circlet, avatarId, postion++);
+    countSetNum(setNumMap, reliquaries.circlet.id);
   }
+
+  // set info
+  const setIndex = 0;
+  setNumMap.forEach((num, setId) => {
+    if (num > 2) {
+      const setNum = num >= 4 ? 4 : 2;
+      const text = getReliquarySetName(setId, lang) + " [" + setNum + "]";
+      drawText(
+        ctx,
+        text,
+        reliquarySetX,
+        reliquarySetY +
+          contentMragin * setIndex +
+          reliquarySetTextFontSize * setIndex,
+        reliquarySetTextFontSize,
+        reliquarySetTextFontColor,
+        reliquarySetTextFontFamily
+      );
+    }
+  });
+
   return;
 }
 
@@ -471,6 +507,7 @@ async function drawReliquary(
   ctx.stroke();
   ctx.restore();
 
+  // sub prop
   for (let i = 0; i < reliquary.subProps.length; i++) {
     await drawReliquarySubProp(ctx, reliquary.subProps[i], i, imageX, imageY);
   }
@@ -511,6 +548,18 @@ async function drawReliquarySubProp(
     reliquarySubPropTextFontColor,
     reliquarySubPropTextFontFamily
   );
+  return;
+}
+
+function countSetNum(setNumMap: Map<number, number>, reliquaryId: number) {
+  const setId = getReliquarySetId(reliquaryId);
+  if (setId) {
+    if (setNumMap.has(setId)) {
+      setNumMap.set(setId, (setNumMap.get(setId) || 1) + 1);
+    } else {
+      setNumMap.set(setId, 1);
+    }
+  }
   return;
 }
 

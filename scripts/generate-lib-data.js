@@ -1,7 +1,7 @@
 const { resolve } = require("node:path");
 const fs = require("node:fs");
 
-const dataBasePath = resolve(__dirname, "..", "lib", "data");
+const dataBasePath = resolve(__dirname, "..", "src", "data");
 
 // weapons
 
@@ -16,7 +16,7 @@ let weaponFileData = `export type WeaponsProps = {
 
 export const weapons: WeaponsProps = {`;
 
-weaponsJsonData.forEach(weanponData => {
+weaponsJsonData.forEach((weanponData) => {
   weaponFileData += `\n  ${weanponData.id}: {
     type: "${weanponData.weaponType}",
     nameTextMapHash: ${weanponData.nameTextMapHash}
@@ -25,10 +25,7 @@ weaponsJsonData.forEach(weanponData => {
 
 weaponFileData += "};";
 
-fs.writeFileSync(
-  resolve(dataBasePath, "weapons.ts"),
-  weaponFileData
-);
+fs.writeFileSync(resolve(dataBasePath, "weapons.ts"), weaponFileData);
 
 // reliquaries
 
@@ -63,6 +60,16 @@ export type ReliquariesProps = {
 export const reliquaries: ReliquariesProps = {
 `;
 
+let reliquarySetFileData = `
+export type ReliquarySetProps = {
+  [key: number]: {
+    nameTextMapHash: number;
+  };
+};
+
+export const reliquarySet: ReliquarySetProps = {
+`;
+
 let reliquariesLocFileData = `
 import { LocProps } from ".";
 
@@ -72,16 +79,16 @@ export const reliquariesLoc: LocProps = `;
 let reliquarySetMap = {};
 let equipAffixMap = {};
 
-reliquarySetJsonData.forEach(set => {
+reliquarySetJsonData.forEach((set) => {
   reliquarySetMap[set.setId] = {
-    affixId: set.EquipAffixId
-  }
+    affixId: set.EquipAffixId,
+  };
 });
 
-equipAffixJsonData.forEach(affix => {
+equipAffixJsonData.forEach((affix) => {
   equipAffixMap[affix.id] = {
-    nameTextMapHash: affix.nameTextMapHash
-  }
+    nameTextMapHash: affix.nameTextMapHash,
+  };
 });
 
 let reliquariesLoc = {
@@ -103,51 +110,74 @@ let reliquariesLoc = {
 };
 
 function addReliquariesLoc(textMapHash) {
-  reliquariesLoc['en'][textMapHash] = enTextMapHash[textMapHash];
-  reliquariesLoc['ru'][textMapHash] = ruTextMapHash[textMapHash];
-  reliquariesLoc['vi'][textMapHash] = viTextMapHash[textMapHash];
-  reliquariesLoc['th'][textMapHash] = thTextMapHash[textMapHash];
-  reliquariesLoc['pt'][textMapHash] = ptTextMapHash[textMapHash];
-  reliquariesLoc['kr'][textMapHash] = krTextMapHash[textMapHash];
-  reliquariesLoc['jp'][textMapHash] = jpTextMapHash[textMapHash];
-  reliquariesLoc['id'][textMapHash] = idTextMapHash[textMapHash];
-  reliquariesLoc['fr'][textMapHash] = frTextMapHash[textMapHash];
-  reliquariesLoc['es'][textMapHash] = esTextMapHash[textMapHash];
-  reliquariesLoc['de'][textMapHash] = deTextMapHash[textMapHash];
-  reliquariesLoc['zh-TW'][textMapHash] = chsTextMapHash[textMapHash];
-  reliquariesLoc['zh-CN'][textMapHash] = chtTextMapHash[textMapHash];
-  reliquariesLoc['it'][textMapHash] = itTextMapHash[textMapHash];
-  reliquariesLoc['tr'][textMapHash] = trTextMapHash[textMapHash];
+  reliquariesLoc["en"][textMapHash] = enTextMapHash[textMapHash];
+  reliquariesLoc["ru"][textMapHash] = ruTextMapHash[textMapHash];
+  reliquariesLoc["vi"][textMapHash] = viTextMapHash[textMapHash];
+  reliquariesLoc["th"][textMapHash] = thTextMapHash[textMapHash];
+  reliquariesLoc["pt"][textMapHash] = ptTextMapHash[textMapHash];
+  reliquariesLoc["kr"][textMapHash] = krTextMapHash[textMapHash];
+  reliquariesLoc["jp"][textMapHash] = jpTextMapHash[textMapHash];
+  reliquariesLoc["id"][textMapHash] = idTextMapHash[textMapHash];
+  reliquariesLoc["fr"][textMapHash] = frTextMapHash[textMapHash];
+  reliquariesLoc["es"][textMapHash] = esTextMapHash[textMapHash];
+  reliquariesLoc["de"][textMapHash] = deTextMapHash[textMapHash];
+  reliquariesLoc["zh-TW"][textMapHash] = chsTextMapHash[textMapHash];
+  reliquariesLoc["zh-CN"][textMapHash] = chtTextMapHash[textMapHash];
+  reliquariesLoc["it"][textMapHash] = itTextMapHash[textMapHash];
+  reliquariesLoc["tr"][textMapHash] = trTextMapHash[textMapHash];
 }
 
-reliquaryJsonData.forEach(reliquaryData => {
+reliquaryJsonData.forEach((reliquaryData) => {
   reliquariesFileData += `\n  ${reliquaryData.id}: {\n  nameTextMapHash: ${reliquaryData.nameTextMapHash},`;
   addReliquariesLoc(reliquaryData.nameTextMapHash);
-  if(reliquaryData.setId){
+  if (reliquaryData.setId) {
     const affixId = reliquarySetMap[reliquaryData.setId]?.affixId;
-    if(affixId){
+    if (affixId) {
       const setNameTextMapHash = equipAffixMap[affixId]?.nameTextMapHash;
-      if(setNameTextMapHash){
+      if (setNameTextMapHash) {
         reliquariesFileData += `\n    setId: ${reliquaryData.setId},\n    setNameTextMapHash: ${setNameTextMapHash}`;
         addReliquariesLoc(setNameTextMapHash);
-      }else{
-        console.warn(`equip affix data missing, reliquaryId:${reliquaryData.id} reliquarySetId:${reliquaryData.setId} affixId:${affixId}`);
+      } else {
+        console.warn(
+          `equip affix data missing, reliquaryId:${reliquaryData.id} reliquarySetId:${reliquaryData.setId} affixId:${affixId}`
+        );
       }
-    }else{
-      console.warn(`reliquary set data missing, reliquaryId:${reliquaryData.id} reliquarySetId:${reliquaryData.setId}`);
+    } else {
+      console.warn(
+        `reliquary set data missing, reliquaryId:${reliquaryData.id} reliquarySetId:${reliquaryData.setId}`
+      );
     }
   }
-  reliquariesFileData += '},';
+  reliquariesFileData += "},";
 });
 reliquariesFileData += "};";
-reliquariesLocFileData += JSON.stringify(reliquariesLoc, 2) + ';';
+reliquariesLocFileData += JSON.stringify(reliquariesLoc, 2) + ";";
 
-fs.writeFileSync(
-  resolve(dataBasePath, "reliquaries.ts"),
-  reliquariesFileData
-);
+reliquarySetJsonData.forEach((setData) => {
+  const affixId = reliquarySetMap[setData.setId]?.affixId;
+  if (affixId) {
+    const nameTextMapHash = equipAffixMap[affixId]?.nameTextMapHash;
+    if (nameTextMapHash) {
+      reliquarySetFileData += `\n  ${setData.setId}: {\n  nameTextMapHash: ${nameTextMapHash} },`;
+    } else {
+      console.warn(
+        `equip affix data missing, reliquarySetId:${setData.setId} affixId:${affixId}`
+      );
+    }
+  } else {
+    console.warn(`reliquary set data missing, reliquarySetId:${setData.setId}`);
+  }
+});
+reliquarySetFileData += "\n};";
+
+fs.writeFileSync(resolve(dataBasePath, "reliquaries.ts"), reliquariesFileData);
 
 fs.writeFileSync(
   resolve(dataBasePath, "reliquaries-loc.ts"),
   reliquariesLocFileData
+);
+
+fs.writeFileSync(
+  resolve(dataBasePath, "reliquary-set.ts"),
+  reliquarySetFileData
 );
