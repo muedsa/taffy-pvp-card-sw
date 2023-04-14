@@ -9,3 +9,7 @@ export type NumberStringProps = {
 export type StringNumberProps = {
   [key: string]: number;
 };
+
+export interface LocProps {
+  [key: string]: StringStringProps;
+}

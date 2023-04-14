@@ -1,10 +1,6 @@
+import { LocProps } from ".";
+
 // from https://github.com/EnkaNetwork/API-docs/blob/master/store/loc.json
-import { StringStringProps } from ".";
-
-export interface LocProps {
-  [key: string]: StringStringProps;
-}
-
 export const loc: LocProps = {
   en: {
     "20848859": "Blackcliff Slasher",
@@ -2438,7 +2434,7 @@ export const loc: LocProps = {
     achievements: "Conquistas totais",
     level: "Nível",
   },
-  ko: {
+  kr: {
     "20848859": "흑암참도",
     "33330467": "원소 숙달",
     "37147251": "일월의 정수",
@@ -2924,7 +2920,7 @@ export const loc: LocProps = {
     achievements: "업적 수량",
     level: "레벨",
   },
-  ja: {
+  jp: {
     "20848859": "黒岩の斬刀",
     "33330467": "元素熟達",
     "37147251": "匣中日月",
