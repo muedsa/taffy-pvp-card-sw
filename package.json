@@ -8,7 +8,7 @@
     "test": "tsc & node test/test",
     "prettier": "prettier --write .",
     "build-asset-image": "tsc & node ./scripts/generate-asset-image",
-    "build-lib-data": "node ./scripts/generate-lib-data & prettier --write ./lib/data"
+    "build-lib-data": "node ./scripts/generate-lib-data & prettier --write ./src/data"
   },
   "keywords": [],
   "author": "MUEDSA",
