@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "prettier --write . & tsc",
-    "test": "tsc & node test/gc-test",
+    "test": "tsc & node test/test",
     "prettier": "prettier --write .",
     "build-asset-image": "tsc & node ./scripts/generate-asset-image",
     "build-lib-data": "node ./scripts/generate-lib-data & prettier --write ./lib/data"

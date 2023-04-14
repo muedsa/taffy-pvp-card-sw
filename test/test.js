@@ -3,10 +3,10 @@ const { generateCard } = require("../dist");
 
 const character = {
   owner: {
-    uid: 100000001,
+    uid: 101745173,
     name: "MUEDSA",
   },
-  id: 10000024,
+  id: 10000060,
   level: 81,
   talent: 0,
   skills: [6, 8, 10],
