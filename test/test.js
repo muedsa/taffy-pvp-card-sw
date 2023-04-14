@@ -212,7 +212,7 @@ console.time("card generate time");
 generateCard(character)
   .then((canvas) => {
     console.timeEnd("card generate time");
-    fs.writeFileSync(resolve(__dirname, 'text.png'), canvas.toBuffer("image/png"));
+    fs.writeFileSync(resolve(__dirname, 'test.png'), canvas.toBuffer("image/png"));
     const url = canvas.toDataURL("image/png");
     cp.exec("clip").stdin.end(url);
     console.log("clip!");
