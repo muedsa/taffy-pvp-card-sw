@@ -1,4 +1,14 @@
+import fs from "node:fs";
 import { SKRSContext2D, loadImage } from "@napi-rs/canvas";
+
+async function exists(path: string): Promise<boolean> {
+  try {
+    await fs.promises.access(path, fs.constants.F_OK);
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 export async function loadImageAndDraw(
   ctx: SKRSContext2D,
@@ -8,6 +18,9 @@ export async function loadImageAndDraw(
   w?: number,
   h?: number
 ) {
+  if (!(await exists(path))) {
+    throw new Error("not exists file: " + path);
+  }
   const image = await loadImage(path);
   ctx.drawImage(image, x, y, w || image.width, h || image.height);
   // ctx.fillStyle = "#ffffff";
@@ -25,6 +38,9 @@ export async function loadImageAndOffsetDraw(
   w?: number,
   h?: number
 ) {
+  if (!(await exists(path))) {
+    throw new Error("not exists file: " + path);
+  }
   const image = await loadImage(path);
   w = w || image.width;
   h = h || image.height;
