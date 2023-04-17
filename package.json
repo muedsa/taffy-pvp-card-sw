@@ -1,7 +1,7 @@
 {
   "name": "taffy-pvp-card-sw",
   "version": "0.0.1",
-  "description": "",
+  "description": "Genshin PVP Card Generator",
   "main": "dist/index.js",
   "scripts": {
     "build": "prettier --write . & gulp",
@@ -10,7 +10,10 @@
     "build-asset-image": "gulp & node ./scripts/generate-asset-image",
     "build-lib-data": "node ./scripts/generate-lib-data & prettier --write ./src/data"
   },
-  "keywords": [],
+  "keywords": [
+    "genshin",
+    "canvas"
+  ],
   "author": "MUEDSA",
   "license": "MIT",
   "devDependencies": {
