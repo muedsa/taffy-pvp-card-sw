@@ -39,28 +39,29 @@ import {
 const cardPadding = 5;
 const contentMragin = 3;
 
-const fontFamily = "Noto Sans SC";
+const globalFontFamily = "Noto Sans SC";
+const globalFontColor = "#ffffff";
 
 const characterImageSize = 256;
 const characterImageX = 0 + cardPadding;
 const characterImageY = 0 + cardPadding;
 
 const ownerTextFontSize = 16;
-const ownerTextFontFamily = fontFamily;
-const ownerTextFontColor = "#ffffff";
+const ownerTextFontFamily = globalFontFamily;
+const ownerTextFontColor = globalFontColor;
 const ownerTextX = characterImageX + contentMragin;
 const ownerTextY = characterImageY + contentMragin;
 
 const characterLevelTextFontSize = 16;
-const characterLevelTextFontFamily = fontFamily;
-const characterLevelTextFontColor = "#ffffff";
+const characterLevelTextFontFamily = globalFontFamily;
+const characterLevelTextFontColor = globalFontColor;
 const characterLevelTextEndX =
   characterImageX + characterImageSize - contentMragin;
 const characterLevelTextEndY = characterImageY + contentMragin;
 
 const characterSkillsTextFontSize = 16;
-const characterSkillsTextFontFamily = fontFamily;
-const characterSkillsTextFontColor = "#ffffff";
+const characterSkillsTextFontFamily = globalFontFamily;
+const characterSkillsTextFontColor = globalFontColor;
 const characterSkillsTextX = characterImageX + contentMragin;
 const characterSkillsTextY =
   characterImageY +
@@ -70,8 +71,8 @@ const characterSkillsTextY =
 characterImageY + characterImageSize - characterSkillsTextFontSize - 3;
 
 const characterTalentTextFontSize = 16;
-const characterTalentTextFontFamily = fontFamily;
-const characterTalentTextFontColor = "#ffffff";
+const characterTalentTextFontFamily = globalFontFamily;
+const characterTalentTextFontColor = globalFontColor;
 const characterTalentTextEndX = characterImageX + characterImageSize - 3;
 const characterTalentTextEndY =
   characterImageY + characterImageSize - characterSkillsTextFontSize - 3;
@@ -89,8 +90,8 @@ const characterPropTextEndX =
   cardPadding + characterImageSize + contentMragin + characterPropWidth;
 const characterPropTextEndY = characterPropTextY;
 const characterPropTextFontSize = characterPropHeigth;
-const characterPropTextFontFamily = fontFamily;
-const characterPropTextFontColor = "#ffffff";
+const characterPropTextFontFamily = globalFontFamily;
+const characterPropTextFontColor = globalFontColor;
 
 const reliquaryInfoHeight = 64 + contentMragin;
 const reliquaryImageSize = reliquaryInfoHeight;
@@ -117,8 +118,8 @@ const reliquaryImageYList = [
 const reliquaryMainPropImageSize = reliquaryImageSize / 2 - 2;
 
 const reliquaryMainPropTextFontSize = 14;
-const reliquaryMainPropTextFontFamily = fontFamily;
-const reliquaryMainPropTextFontColor = "#ffffff";
+const reliquaryMainPropTextFontFamily = globalFontFamily;
+const reliquaryMainPropTextFontColor = globalFontColor;
 
 const reliquarySubPropWidth =
   (reliquaryInfoWidth - reliquaryImageSize - contentMragin) / 2;
@@ -139,8 +140,8 @@ const reliquarySubPropRYList = [
   reliquarySubPropRY + reliquarySubPropHeigth + contentMragin,
 ];
 const reliquarySubPropTextFontSize = reliquarySubPropImageSize - contentMragin;
-const reliquarySubPropTextFontFamily = fontFamily;
-const reliquarySubPropTextFontColor = "#ffffff";
+const reliquarySubPropTextFontFamily = globalFontFamily;
+const reliquarySubPropTextFontColor = globalFontColor;
 
 const reliquarySetTextFontSize = reliquarySubPropImageSize - contentMragin;
 const reliquarySetEndX =
@@ -151,8 +152,8 @@ const reliquarySetEndY =
   reliquaryInfoHeight * 3 +
   contentMragin * 2 -
   reliquarySetTextFontSize;
-const reliquarySetTextFontFamily = fontFamily;
-const reliquarySetTextFontColor = "#ffffff";
+const reliquarySetTextFontFamily = globalFontFamily;
+const reliquarySetTextFontColor = globalFontColor;
 
 const weaponImageSize = reliquaryInfoHeight;
 const weaponNameTextFontSize = characterPropTextFontSize;
@@ -160,8 +161,8 @@ const weaponNameTextFontSize = characterPropTextFontSize;
 const weaponNameTextEndX = characterPropImageX + characterPropWidth;
 const weaponNameTextEndY =
   characterImageY + characterImageSize - weaponNameTextFontSize;
-const weaponNameTextFontFamily = fontFamily;
-const weaponNameTextFontColor = "#ffffff";
+const weaponNameTextFontFamily = globalFontFamily;
+const weaponNameTextFontColor = globalFontColor;
 
 const weaponImageX = weaponNameTextEndX - weaponImageSize;
 const weaponImageY = weaponNameTextEndY - contentMragin - weaponImageSize;
@@ -178,8 +179,8 @@ const weaponSubPropImageY =
   weaponMainPropImageY + weaponPropImageSize + contentMragin;
 const weaponSubPropTextEndX = weaponSubPropImageX - contentMragin;
 const weaponSubPropTextEndY = weaponSubPropImageY;
-const weaponPropTextFontFamily = fontFamily;
-const weaponPropTextFontColor = "#ffffff";
+const weaponPropTextFontFamily = globalFontFamily;
+const weaponPropTextFontColor = globalFontColor;
 
 const cardWidth =
   cardPadding * 2 + characterImageSize + contentMragin + characterPropWidth;
@@ -464,7 +465,7 @@ async function drawReliquary(
   const imageOffsetX = reliquaryImageSize / 3;
   const imageOffsetY = 0;
   ctx.save();
-  ctx.strokeStyle = "#ffffff";
+  ctx.strokeStyle = globalFontColor;
   ctx.lineWidth = 2;
   ctx.roundRect(
     imageX,
@@ -586,7 +587,7 @@ async function drawWeapon(ctx: SKRSContext2D, weapon: Weapon, lang: string) {
 
   // weapon image
   ctx.save();
-  ctx.strokeStyle = "#ffffff";
+  ctx.strokeStyle = globalFontColor;
   ctx.lineWidth = 2;
   ctx.roundRect(
     weaponImageX,

@@ -5,7 +5,7 @@ export const backgroupColors: StringStringProps = {
   water: "#48b8d0",
   wind: "#629099",
   electric: "#9b59b6",
-  ice: "#d3e6f1",
+  ice: "#b9d9eb",
   grass: "#53be80",
   rock: "#f9e79f",
 };
