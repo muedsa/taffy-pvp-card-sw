@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import { resolve } from "path";
 import { backgroupColors } from "./data/colors";
 import {
@@ -17,10 +18,22 @@ import { reliquaries } from "./data/reliquaries";
 import { reliquarySet } from "./data/reliquary-set";
 import { reliquariesLoc } from "./data/reliquaries-loc";
 
-const basePath = resolve(__dirname, "..");
+function findDir(...paths: string[]): string {
+  if (paths.length > 3) {
+    throw new Error("not found necessary dir");
+  }
+  const dirPaht = resolve(__dirname, ...paths);
+  if (!fs.existsSync(dirPaht)) {
+    return findDir("..", ...paths);
+  } else {
+    return dirPaht;
+  }
+}
+
+const assetPath = findDir("asset");
 
 export function getAssetFontPath(filename: string): string {
-  return basePath + "/asset/font/" + filename;
+  return assetPath + "/font/" + filename;
 }
 
 export function getCharacterElement(avatarId: number): string {
@@ -33,13 +46,11 @@ export function getBgColor(avatarId: number): string {
 }
 
 export function getCharacterImagePath(avatarId: number): string {
-  return (
-    basePath + "/asset/image/splash/" + characters[avatarId].image + ".png"
-  );
+  return assetPath + "/image/splash/" + characters[avatarId].image + ".png";
 }
 
 export function getCharacterPropImagePath(propId: number): string {
-  return basePath + characterPropImagePaths[propId];
+  return assetPath + characterPropImagePaths[propId];
 }
 
 export function getFightPropLoc(propId: string, lang: string): string {
@@ -57,8 +68,8 @@ export function getCharacterMasterElementDamageProp(avatarId: number): number {
 
 export function getReliquaryImagePath(type: string, avatarId: number): string {
   return (
-    basePath +
-    "/asset/image/reliquary/" +
+    assetPath +
+    "/image/reliquary/" +
     type +
     "_" +
     getCharacterElement(avatarId) +
@@ -67,7 +78,7 @@ export function getReliquaryImagePath(type: string, avatarId: number): string {
 }
 
 export function getReliquaryPropImagePath(propId: string): string {
-  return basePath + reliquaryPropImagePaths[propId];
+  return assetPath + reliquaryPropImagePaths[propId];
 }
 
 function textPropValue(value: number): string {
@@ -125,7 +136,7 @@ export function getLoc(key: string, lang: string): string {
 
 export function getWeaponImagePath(weaponId: number): string {
   const weaponType = weapons[weaponId].type;
-  return basePath + weaponImagePaths[weaponType];
+  return assetPath + weaponImagePaths[weaponType];
 }
 
 export function getWeaponName(weaponId: number, lang: string): string {

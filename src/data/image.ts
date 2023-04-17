@@ -1,8 +1,8 @@
 import { NumberStringProps, StringStringProps } from ".";
 
-const elementPathPerfix = "/asset/image/element/";
-const propPathPerfix = "/asset/image/prop/";
-const weaponPathPerfix = "/asset/image/weapon/";
+const elementPathPerfix = "/image/element/";
+const propPathPerfix = "/image/prop/";
+const weaponPathPerfix = "/image/weapon/";
 
 export const characterPropImagePaths: NumberStringProps = {
   2000: propPathPerfix + "hp.png",
