@@ -1,5 +1,5 @@
 const fs = require("node:fs");
-const { resolve } = require("node:path")
+const { resolve } = require("node:path");
 const cp = require("node:child_process");
 
 const { generateCard } = require("../dist");
@@ -212,7 +212,10 @@ console.time("card generate time");
 generateCard(character)
   .then((canvas) => {
     console.timeEnd("card generate time");
-    fs.writeFileSync(resolve(__dirname, 'test.png'), canvas.toBuffer("image/png"));
+    fs.writeFileSync(
+      resolve(__dirname, "test.png"),
+      canvas.toBuffer("image/png")
+    );
     const url = canvas.toDataURL("image/png");
     cp.exec("clip").stdin.end(url);
     console.log("clip!");

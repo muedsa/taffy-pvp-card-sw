@@ -142,9 +142,15 @@ const reliquarySubPropTextFontSize = reliquarySubPropImageSize - contentMragin;
 const reliquarySubPropTextFontFamily = fontFamily;
 const reliquarySubPropTextFontColor = "#ffffff";
 
-const reliquarySetX = reliquaryX + reliquaryInfoWidth + contentMragin;
-const reliquarySetY = reliquaryY + reliquaryInfoHeight * 2 + contentMragin * 2;
 const reliquarySetTextFontSize = reliquarySubPropImageSize - contentMragin;
+const reliquarySetEndX =
+  cardPadding + characterImageSize + contentMragin + characterPropWidth;
+const reliquarySetEndY =
+  cardPadding +
+  characterImageSize +
+  reliquaryInfoHeight * 3 +
+  contentMragin * 2 -
+  reliquarySetTextFontSize;
 const reliquarySetTextFontFamily = fontFamily;
 const reliquarySetTextFontColor = "#ffffff";
 
@@ -422,22 +428,24 @@ async function drawReliquaries(
   }
 
   // set info
-  const setIndex = 0;
+  let setIndex = 0;
   setNumMap.forEach((num, setId) => {
-    if (num > 2) {
+    if (num >= 2) {
       const setNum = num >= 4 ? 4 : 2;
       const text = getReliquarySetName(setId, lang) + " [" + setNum + "]";
       drawText(
         ctx,
         text,
-        reliquarySetX,
-        reliquarySetY +
-          contentMragin * setIndex +
+        reliquarySetEndX,
+        reliquarySetEndY -
+          contentMragin * setIndex -
           reliquarySetTextFontSize * setIndex,
         reliquarySetTextFontSize,
         reliquarySetTextFontColor,
-        reliquarySetTextFontFamily
+        reliquarySetTextFontFamily,
+        "right"
       );
+      setIndex++;
     }
   });
 
