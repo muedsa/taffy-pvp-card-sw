@@ -16,8 +16,8 @@ const equipTypeMap = {
 function buildReliquaryInfo(item) {
   let info;
   if (item) {
-    const reliquarySubstats = item.flat.reliquaryMainstat.reliquarySubstats;
-    let subProps = Array.isArray(reliquarySubstats)
+    const reliquarySubstats = item.flat.reliquarySubstats;
+    const subProps = Array.isArray(reliquarySubstats)
       ? reliquarySubstats.map((subStats) => {
           return {
             id: subStats.appendPropId,
