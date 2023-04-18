@@ -38,10 +38,10 @@ export const reliquaryPropImagePaths: StringStringProps = {
   FIGHT_PROP_FIRE_ADD_HURT: elementPathPerfix + "fire.png",
   FIGHT_PROP_ELEC_ADD_HURT: elementPathPerfix + "electric.png",
   FIGHT_PROP_WATER_ADD_HURT: elementPathPerfix + "water.png",
-  FIGHT_PROP_WIND_ADD_HURT: elementPathPerfix + "grass.png",
-  FIGHT_PROP_ICE_ADD_HURT: elementPathPerfix + "wind.png",
+  FIGHT_PROP_WIND_ADD_HURT: elementPathPerfix + "wind.png",
+  FIGHT_PROP_ICE_ADD_HURT: elementPathPerfix + "ice.png",
   FIGHT_PROP_ROCK_ADD_HURT: elementPathPerfix + "rock.png",
-  FIGHT_PROP_GRASS_ADD_HURT: elementPathPerfix + "ice.png",
+  FIGHT_PROP_GRASS_ADD_HURT: elementPathPerfix + "grass.png",
 };
 
 export const weaponImagePaths: StringStringProps = {
