@@ -2,7 +2,7 @@ const gulp = require("gulp");
 const clean = require("gulp-clean");
 const ts = require("gulp-typescript");
 
-const tsProject = ts.createProject("tsconfig.json", { declaration: true });
+const tsProject = ts.createProject("tsconfig.json");
 
 const outDir = tsProject.options.outDir;
 
