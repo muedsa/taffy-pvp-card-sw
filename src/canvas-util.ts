@@ -61,11 +61,15 @@ export function drawText(
   y: number,
   fontSize: number,
   fontColor = "#ffffff",
-  fontFamily = "sans-serif",
+  fontFamily = "",
   textAlign: CanvasTextAlign = "left"
 ) {
   ctx.textBaseline = "top";
-  ctx.font = fontSize + "px " + '"' + fontFamily + '"';
+  if (fontFamily.indexOf(" ") > -1) {
+    ctx.font = `${fontSize}px "${fontFamily}"`;
+  } else {
+    ctx.font = `${fontSize}px ${fontFamily}`;
+  }
   ctx.fillStyle = fontColor;
   ctx.textAlign = textAlign;
   ctx.fillText(text, x, y);

@@ -15,5 +15,5 @@ module.exports = {
   env: {
     node: true,
     es2018: true,
-  }
+  },
 };

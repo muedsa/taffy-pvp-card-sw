@@ -15,23 +15,19 @@ const util_1 = require("./util");
 const canvas_util_1 = require("./canvas-util");
 const cardPadding = 5;
 const contentMragin = 3;
-const globalFontFamily = "Noto Sans SC";
 const globalFontColor = "#ffffff";
 const characterImageSize = 256;
 const characterImageX = 0 + cardPadding;
 const characterImageY = 0 + cardPadding;
 const ownerTextFontSize = 16;
-const ownerTextFontFamily = globalFontFamily;
 const ownerTextFontColor = globalFontColor;
 const ownerTextX = characterImageX + contentMragin;
 const ownerTextY = characterImageY + contentMragin;
 const characterLevelTextFontSize = 16;
-const characterLevelTextFontFamily = globalFontFamily;
 const characterLevelTextFontColor = globalFontColor;
 const characterLevelTextEndX = characterImageX + characterImageSize - contentMragin;
 const characterLevelTextEndY = characterImageY + contentMragin;
 const characterSkillsTextFontSize = 16;
-const characterSkillsTextFontFamily = globalFontFamily;
 const characterSkillsTextFontColor = globalFontColor;
 const characterSkillsTextX = characterImageX + contentMragin;
 const characterSkillsTextY = characterImageY +
@@ -40,7 +36,6 @@ const characterSkillsTextY = characterImageY +
     contentMragin;
 characterImageY + characterImageSize - characterSkillsTextFontSize - 3;
 const characterTalentTextFontSize = 16;
-const characterTalentTextFontFamily = globalFontFamily;
 const characterTalentTextFontColor = globalFontColor;
 const characterTalentTextEndX = characterImageX + characterImageSize - 3;
 const characterTalentTextEndY = characterImageY + characterImageSize - characterSkillsTextFontSize - 3;
@@ -54,7 +49,6 @@ const characterPropTextY = characterImageY;
 const characterPropTextEndX = cardPadding + characterImageSize + contentMragin + characterPropWidth;
 const characterPropTextEndY = characterPropTextY;
 const characterPropTextFontSize = characterPropHeigth;
-const characterPropTextFontFamily = globalFontFamily;
 const characterPropTextFontColor = globalFontColor;
 const reliquaryInfoHeight = 64 + contentMragin;
 const reliquaryImageSize = reliquaryInfoHeight;
@@ -77,7 +71,6 @@ const reliquaryImageYList = [
 ];
 const reliquaryMainPropImageSize = reliquaryImageSize / 2 - 2;
 const reliquaryMainPropTextFontSize = 14;
-const reliquaryMainPropTextFontFamily = globalFontFamily;
 const reliquaryMainPropTextFontColor = globalFontColor;
 const reliquarySubPropWidth = (reliquaryInfoWidth - reliquaryImageSize - contentMragin) / 2;
 const reliquarySubPropHeigth = (reliquaryInfoHeight - contentMragin) / 2;
@@ -97,7 +90,6 @@ const reliquarySubPropRYList = [
     reliquarySubPropRY + reliquarySubPropHeigth + contentMragin,
 ];
 const reliquarySubPropTextFontSize = reliquarySubPropImageSize - contentMragin;
-const reliquarySubPropTextFontFamily = globalFontFamily;
 const reliquarySubPropTextFontColor = globalFontColor;
 const reliquarySetTextFontSize = reliquarySubPropImageSize - contentMragin;
 const reliquarySetEndX = cardPadding + characterImageSize + contentMragin + characterPropWidth;
@@ -106,13 +98,11 @@ const reliquarySetEndY = cardPadding +
     reliquaryInfoHeight * 3 +
     contentMragin * 2 -
     reliquarySetTextFontSize;
-const reliquarySetTextFontFamily = globalFontFamily;
 const reliquarySetTextFontColor = globalFontColor;
 const weaponImageSize = reliquaryInfoHeight;
 const weaponNameTextFontSize = characterPropTextFontSize;
 const weaponNameTextEndX = characterPropImageX + characterPropWidth;
 const weaponNameTextEndY = characterImageY + characterImageSize - weaponNameTextFontSize;
-const weaponNameTextFontFamily = globalFontFamily;
 const weaponNameTextFontColor = globalFontColor;
 const weaponImageX = weaponNameTextEndX - weaponImageSize;
 const weaponImageY = weaponNameTextEndY - contentMragin - weaponImageSize;
@@ -126,7 +116,6 @@ const weaponSubPropImageX = weaponMainPropImageX;
 const weaponSubPropImageY = weaponMainPropImageY + weaponPropImageSize + contentMragin;
 const weaponSubPropTextEndX = weaponSubPropImageX - contentMragin;
 const weaponSubPropTextEndY = weaponSubPropImageY;
-const weaponPropTextFontFamily = globalFontFamily;
 const weaponPropTextFontColor = globalFontColor;
 const cardWidth = cardPadding * 2 + characterImageSize + contentMragin + characterPropWidth;
 const cardHeight = cardPadding * 2 +
@@ -137,26 +126,35 @@ exports.defaultCardConfig = {
     width: cardWidth,
     height: cardHeight,
     lang: "zh-CN",
+    fontFamily: "Noto Sans SC",
+    customeFonts: [
+        {
+            fontPath: (0, util_1.getAssetFontPath)("NotoSansSC-Regular.otf"),
+            fontFamily: "Noto Sans SC",
+        },
+    ],
 };
 function generateCard(character, config = exports.defaultCardConfig) {
     return __awaiter(this, void 0, void 0, function* () {
-        initFont();
+        registCustomeFonts(config);
         const canvas = (0, canvas_1.createCanvas)(config.width, config.height);
         const ctx = canvas.getContext("2d");
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = "high";
         ctx.scale(config.width / cardWidth, config.height / cardHeight);
         initBackground(ctx, character);
-        yield drawCharacter(ctx, character, config);
+        yield drawCharacter(ctx, config, character);
         yield drawCharacterProps(ctx, config, character);
-        yield drawReliquaries(ctx, character.reliquaries, character.id, config.lang);
-        yield drawWeapon(ctx, character.weapon, config.lang);
+        yield drawReliquaries(ctx, config, character.reliquaries, character.id);
+        yield drawWeapon(ctx, config, character.weapon);
         return canvas;
     });
 }
 exports.generateCard = generateCard;
-function initFont() {
-    canvas_1.GlobalFonts.registerFromPath((0, util_1.getAssetFontPath)("NotoSansSC-Regular.otf"), "Noto Sans SC");
+function registCustomeFonts(config) {
+    if (Array.isArray(config.customeFonts)) {
+        config.customeFonts.forEach((font) => canvas_1.GlobalFonts.registerFromPath(font.fontPath, font.fontFamily));
+    }
 }
 function initBackground(ctx, character) {
     const color = (0, util_1.getBgColor)(character.id);
@@ -164,7 +162,8 @@ function initBackground(ctx, character) {
     ctx.fillRect(0, 0, cardWidth, cardHeight);
     return color;
 }
-function drawCharacter(ctx, character, config) {
+function drawCharacter(ctx, config, character) {
+    var _a, _b, _c, _d, _e;
     return __awaiter(this, void 0, void 0, function* () {
         const characterImagePath = (0, util_1.getCharacterImagePath)(character.id);
         const skillsText = character.skills.join("-");
@@ -174,22 +173,25 @@ function drawCharacter(ctx, character, config) {
         if (character.owner) {
             // uid
             if (character.owner.uid) {
-                (0, canvas_util_1.drawText)(ctx, "UID:" + character.owner.uid, ownerTextX, ownerTextY, ownerTextFontSize, ownerTextFontColor, ownerTextFontFamily);
+                (0, canvas_util_1.drawText)(ctx, "UID:" + character.owner.uid, ownerTextX, ownerTextY, ownerTextFontSize, ownerTextFontColor, ((_a = config.specialFontFamilies) === null || _a === void 0 ? void 0 : _a.ownerTextFontFamily) || config.fontFamily);
             }
             // name
             if (character.owner.name) {
                 (0, canvas_util_1.drawText)(ctx, character.owner.name, ownerTextX, character.owner.uid
                     ? ownerTextY + ownerTextFontSize + contentMragin
-                    : ownerTextY, ownerTextFontSize, ownerTextFontColor, ownerTextFontFamily);
+                    : ownerTextY, ownerTextFontSize, ownerTextFontColor, ((_b = config.specialFontFamilies) === null || _b === void 0 ? void 0 : _b.ownerTextFontFamily) || config.fontFamily);
             }
         }
         // level
-        (0, canvas_util_1.drawText)(ctx, (0, util_1.getLoc)("level", config.lang) + " " + character.level.toFixed(0), characterLevelTextEndX, characterLevelTextEndY, characterLevelTextFontSize, characterLevelTextFontColor, characterLevelTextFontFamily, "right");
+        (0, canvas_util_1.drawText)(ctx, (0, util_1.getLoc)("level", config.lang) + " " + character.level.toFixed(0), characterLevelTextEndX, characterLevelTextEndY, characterLevelTextFontSize, characterLevelTextFontColor, ((_c = config.specialFontFamilies) === null || _c === void 0 ? void 0 : _c.characterLevelTextFontFamily) ||
+            config.fontFamily, "right");
         // skill level
-        (0, canvas_util_1.drawText)(ctx, skillsText, characterSkillsTextX, characterSkillsTextY, characterSkillsTextFontSize, characterSkillsTextFontColor, characterSkillsTextFontFamily);
+        (0, canvas_util_1.drawText)(ctx, skillsText, characterSkillsTextX, characterSkillsTextY, characterSkillsTextFontSize, characterSkillsTextFontColor, ((_d = config.specialFontFamilies) === null || _d === void 0 ? void 0 : _d.characterSkillsTextFontFamily) ||
+            config.fontFamily);
         // talent
         if (character.talent > 0) {
-            (0, canvas_util_1.drawText)(ctx, character.talent.toFixed(0) + "◈", characterTalentTextEndX, characterTalentTextEndY, characterTalentTextFontSize, characterTalentTextFontColor, characterTalentTextFontFamily, "right");
+            (0, canvas_util_1.drawText)(ctx, character.talent.toFixed(0) + "◈", characterTalentTextEndX, characterTalentTextEndY, characterTalentTextFontSize, characterTalentTextFontColor, ((_e = config.specialFontFamilies) === null || _e === void 0 ? void 0 : _e.characterTalentTextFontFamily) ||
+                config.fontFamily, "right");
         }
         return;
     });
@@ -198,13 +200,14 @@ function drawCharacterProps(ctx, config, character) {
     return __awaiter(this, void 0, void 0, function* () {
         const baseProps = [2000, 2001, 2002, 20, 22, 23, 28];
         for (let i = 0; i < baseProps.length; i++) {
-            yield drawCharacterProp(ctx, character.fightPropMap, baseProps[i], i, config.lang);
+            yield drawCharacterProp(ctx, config, character.fightPropMap, baseProps[i], i);
         }
-        yield drawCharacterProp(ctx, character.fightPropMap, (0, util_1.getCharacterMasterElementDamageProp)(character.id), 7, config.lang);
+        yield drawCharacterProp(ctx, config, character.fightPropMap, (0, util_1.getCharacterMasterElementDamageProp)(character.id), baseProps.length);
         return;
     });
 }
-function drawCharacterProp(ctx, fightPropMap, propId, propPosition, lang) {
+function drawCharacterProp(ctx, config, fightPropMap, propId, propPosition) {
+    var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
         const imageX = characterPropImageX;
         const imageY = characterPropImageY +
@@ -221,53 +224,57 @@ function drawCharacterProp(ctx, fightPropMap, propId, propPosition, lang) {
         // prop image
         yield (0, canvas_util_1.loadImageAndDraw)(ctx, (0, util_1.getCharacterPropImagePath)(propId), imageX, imageY, characterPropImageSize, characterPropImageSize);
         // prop text
-        const propLabel = (0, util_1.getCharacterPropLoc)(propId, lang);
+        const propLabel = (0, util_1.getCharacterPropLoc)(propId, config.lang);
         const propValue = (0, util_1.getCharacterPropText)(propId, fightPropMap[propId]);
-        (0, canvas_util_1.drawText)(ctx, propLabel, textX, textY, characterPropTextFontSize, characterPropTextFontColor, characterPropTextFontFamily);
-        (0, canvas_util_1.drawText)(ctx, propValue, textEndX, textEndY, characterPropTextFontSize, characterPropTextFontColor, characterPropTextFontFamily, "right");
+        (0, canvas_util_1.drawText)(ctx, propLabel, textX, textY, characterPropTextFontSize, characterPropTextFontColor, ((_a = config.specialFontFamilies) === null || _a === void 0 ? void 0 : _a.characterPropTextFontFamily) || config.fontFamily);
+        (0, canvas_util_1.drawText)(ctx, propValue, textEndX, textEndY, characterPropTextFontSize, characterPropTextFontColor, ((_b = config.specialFontFamilies) === null || _b === void 0 ? void 0 : _b.characterPropTextFontFamily) ||
+            config.fontFamily, "right");
         return;
     });
 }
-function drawReliquaries(ctx, reliquaries, avatarId, lang) {
+function drawReliquaries(ctx, config, reliquaries, avatarId) {
     return __awaiter(this, void 0, void 0, function* () {
         let postion = 0;
         const setNumMap = new Map();
         if (reliquaries.flower) {
-            yield drawReliquary(ctx, reliquaries.flower, avatarId, postion++);
+            yield drawReliquary(ctx, config, reliquaries.flower, avatarId, postion++);
             countSetNum(setNumMap, reliquaries.flower.id);
         }
         if (reliquaries.feather) {
-            yield drawReliquary(ctx, reliquaries.feather, avatarId, postion++);
+            yield drawReliquary(ctx, config, reliquaries.feather, avatarId, postion++);
             countSetNum(setNumMap, reliquaries.feather.id);
         }
         if (reliquaries.sands) {
-            yield drawReliquary(ctx, reliquaries.sands, avatarId, postion++);
+            yield drawReliquary(ctx, config, reliquaries.sands, avatarId, postion++);
             countSetNum(setNumMap, reliquaries.sands.id);
         }
         if (reliquaries.goblet) {
-            yield drawReliquary(ctx, reliquaries.goblet, avatarId, postion++);
+            yield drawReliquary(ctx, config, reliquaries.goblet, avatarId, postion++);
             countSetNum(setNumMap, reliquaries.goblet.id);
         }
         if (reliquaries.circlet) {
-            yield drawReliquary(ctx, reliquaries.circlet, avatarId, postion++);
+            yield drawReliquary(ctx, config, reliquaries.circlet, avatarId, postion++);
             countSetNum(setNumMap, reliquaries.circlet.id);
         }
         // set info
         let setIndex = 0;
         setNumMap.forEach((num, setId) => {
+            var _a;
             if (num >= 2) {
                 const setNum = num >= 4 ? 4 : 2;
-                const text = (0, util_1.getReliquarySetName)(setId, lang) + " [" + setNum + "]";
+                const text = (0, util_1.getReliquarySetName)(setId, config.lang) + " [" + setNum + "]";
                 (0, canvas_util_1.drawText)(ctx, text, reliquarySetEndX, reliquarySetEndY -
                     contentMragin * setIndex -
-                    reliquarySetTextFontSize * setIndex, reliquarySetTextFontSize, reliquarySetTextFontColor, reliquarySetTextFontFamily, "right");
+                    reliquarySetTextFontSize * setIndex, reliquarySetTextFontSize, reliquarySetTextFontColor, ((_a = config.specialFontFamilies) === null || _a === void 0 ? void 0 : _a.reliquarySetTextFontFamily) ||
+                    config.fontFamily, "right");
                 setIndex++;
             }
         });
         return;
     });
 }
-function drawReliquary(ctx, reliquary, avatarId, postion) {
+function drawReliquary(ctx, config, reliquary, avatarId, postion) {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         // reliquary image
         const imageX = reliquaryImageXList[postion];
@@ -287,17 +294,19 @@ function drawReliquary(ctx, reliquary, avatarId, postion) {
         // main prop text
         const mainPropTextEndX = imageX + reliquaryImageSize - 2;
         const mainPropTextEndY = imageY + reliquaryImageSize - reliquaryMainPropTextFontSize - contentMragin;
-        (0, canvas_util_1.drawText)(ctx, (0, util_1.getFightPropText)(reliquary.mainProp), mainPropTextEndX, mainPropTextEndY, reliquaryMainPropTextFontSize, reliquaryMainPropTextFontColor, reliquaryMainPropTextFontFamily, "right");
+        (0, canvas_util_1.drawText)(ctx, (0, util_1.getFightPropText)(reliquary.mainProp), mainPropTextEndX, mainPropTextEndY, reliquaryMainPropTextFontSize, reliquaryMainPropTextFontColor, ((_a = config.specialFontFamilies) === null || _a === void 0 ? void 0 : _a.reliquaryMainPropTextFontFamily) ||
+            config.fontFamily, "right");
         ctx.stroke();
         ctx.restore();
         // sub prop
         for (let i = 0; i < reliquary.subProps.length; i++) {
-            yield drawReliquarySubProp(ctx, reliquary.subProps[i], i, imageX, imageY);
+            yield drawReliquarySubProp(ctx, config, reliquary.subProps[i], i, imageX, imageY);
         }
         return;
     });
 }
-function drawReliquarySubProp(ctx, prop, postion, x, y) {
+function drawReliquarySubProp(ctx, config, prop, postion, x, y) {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         // sub prop image
         const imageX = x + reliquarySubPropRXList[postion];
@@ -308,7 +317,8 @@ function drawReliquarySubProp(ctx, prop, postion, x, y) {
         // sub prop text
         const textX = imageX + reliquarySubPropImageSize + contentMragin;
         const textY = imageY;
-        (0, canvas_util_1.drawText)(ctx, (0, util_1.getFightPropText)(prop), textX, textY, reliquarySubPropTextFontSize, reliquarySubPropTextFontColor, reliquarySubPropTextFontFamily);
+        (0, canvas_util_1.drawText)(ctx, (0, util_1.getFightPropText)(prop), textX, textY, reliquarySubPropTextFontSize, reliquarySubPropTextFontColor, ((_a = config.specialFontFamilies) === null || _a === void 0 ? void 0 : _a.reliquarySubPropTextFontFamily) ||
+            config.fontFamily);
         return;
     });
 }
@@ -324,10 +334,11 @@ function countSetNum(setNumMap, reliquaryId) {
     }
     return;
 }
-function drawWeapon(ctx, weapon, lang) {
+function drawWeapon(ctx, config, weapon) {
+    var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function* () {
         // weapon name
-        (0, canvas_util_1.drawText)(ctx, (0, util_1.getWeaponName)(weapon.id, lang), weaponNameTextEndX, weaponNameTextEndY, weaponNameTextFontSize, weaponNameTextFontColor, weaponNameTextFontFamily, "right");
+        (0, canvas_util_1.drawText)(ctx, (0, util_1.getWeaponName)(weapon.id, config.lang), weaponNameTextEndX, weaponNameTextEndY, weaponNameTextFontSize, weaponNameTextFontColor, ((_a = config.specialFontFamilies) === null || _a === void 0 ? void 0 : _a.weaponNameTextFontFamily) || config.fontFamily, "right");
         // weapon image
         ctx.save();
         ctx.strokeStyle = globalFontColor;
@@ -340,12 +351,12 @@ function drawWeapon(ctx, weapon, lang) {
         // weapon main prop image
         yield (0, canvas_util_1.loadImageAndDraw)(ctx, (0, util_1.getReliquaryPropImagePath)(weapon.mainProp.id), weaponMainPropImageX, weaponMainPropImageY, weaponPropImageSize, weaponPropImageSize);
         // weapon main prop text
-        (0, canvas_util_1.drawText)(ctx, (0, util_1.getFightPropText)(weapon.mainProp), weaponMainPropTextEndX, weaponMainPropTextEndY, weaponPropTextFontSize, weaponPropTextFontColor, weaponPropTextFontFamily, "right");
+        (0, canvas_util_1.drawText)(ctx, (0, util_1.getFightPropText)(weapon.mainProp), weaponMainPropTextEndX, weaponMainPropTextEndY, weaponPropTextFontSize, weaponPropTextFontColor, ((_b = config.specialFontFamilies) === null || _b === void 0 ? void 0 : _b.weaponPropTextFontFamily) || config.fontFamily, "right");
         if (weapon.subProp) {
             // weapon sub prop image
             yield (0, canvas_util_1.loadImageAndDraw)(ctx, (0, util_1.getReliquaryPropImagePath)(weapon.subProp.id), weaponSubPropImageX, weaponSubPropImageY, weaponPropImageSize, weaponPropImageSize);
             // weapon sub prop text
-            (0, canvas_util_1.drawText)(ctx, (0, util_1.getFightPropText)(weapon.subProp), weaponSubPropTextEndX, weaponSubPropTextEndY, weaponPropTextFontSize, weaponPropTextFontColor, weaponPropTextFontFamily, "right");
+            (0, canvas_util_1.drawText)(ctx, (0, util_1.getFightPropText)(weapon.subProp), weaponSubPropTextEndX, weaponSubPropTextEndY, weaponPropTextFontSize, weaponPropTextFontColor, ((_c = config.specialFontFamilies) === null || _c === void 0 ? void 0 : _c.weaponPropTextFontFamily) || config.fontFamily, "right");
         }
         return;
     });

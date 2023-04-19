@@ -87,4 +87,25 @@ export interface CardConfig {
     | "zh-TW"
     | "it"
     | "tr";
+  fontFamily: string;
+  specialFontFamilies?: CardFontConfig;
+  customeFonts?: CustomeFonts[];
+}
+
+export interface CustomeFonts {
+  fontPath: string;
+  fontFamily: string;
+}
+
+export interface CardFontConfig {
+  ownerTextFontFamily?: string;
+  characterLevelTextFontFamily?: string;
+  characterSkillsTextFontFamily?: string;
+  characterTalentTextFontFamily?: string;
+  characterPropTextFontFamily?: string;
+  reliquaryMainPropTextFontFamily?: string;
+  reliquarySubPropTextFontFamily?: string;
+  reliquarySetTextFontFamily?: string;
+  weaponNameTextFontFamily?: string;
+  weaponPropTextFontFamily?: string;
 }

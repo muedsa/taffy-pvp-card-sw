@@ -58,9 +58,14 @@ function loadImageAndOffsetDraw(ctx, path, offsetX, offsetY, x, y, w, h) {
     });
 }
 exports.loadImageAndOffsetDraw = loadImageAndOffsetDraw;
-function drawText(ctx, text, x, y, fontSize, fontColor = "#ffffff", fontFamily = "sans-serif", textAlign = "left") {
+function drawText(ctx, text, x, y, fontSize, fontColor = "#ffffff", fontFamily = "", textAlign = "left") {
     ctx.textBaseline = "top";
-    ctx.font = fontSize + "px " + '"' + fontFamily + '"';
+    if (fontFamily.indexOf(" ") > -1) {
+        ctx.font = `${fontSize}px "${fontFamily}"`;
+    }
+    else {
+        ctx.font = `${fontSize}px ${fontFamily}`;
+    }
     ctx.fillStyle = fontColor;
     ctx.textAlign = textAlign;
     ctx.fillText(text, x, y);

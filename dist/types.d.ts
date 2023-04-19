@@ -45,4 +45,23 @@ export interface CardConfig {
     width: number;
     height: number;
     lang: "en" | "ru" | "vi" | "th" | "pt" | "kr" | "jp" | "id" | "fr" | "es" | "de" | "zh-CN" | "zh-TW" | "it" | "tr";
+    fontFamily: string;
+    specialFontFamilies?: CardFontConfig;
+    customeFonts?: CustomeFonts[];
+}
+export interface CustomeFonts {
+    fontPath: string;
+    fontFamily: string;
+}
+export interface CardFontConfig {
+    ownerTextFontFamily?: string;
+    characterLevelTextFontFamily?: string;
+    characterSkillsTextFontFamily?: string;
+    characterTalentTextFontFamily?: string;
+    characterPropTextFontFamily?: string;
+    reliquaryMainPropTextFontFamily?: string;
+    reliquarySubPropTextFontFamily?: string;
+    reliquarySetTextFontFamily?: string;
+    weaponNameTextFontFamily?: string;
+    weaponPropTextFontFamily?: string;
 }
