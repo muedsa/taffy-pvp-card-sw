@@ -10,6 +10,6 @@
 npm install https://github.com/MUedsa/taffy-pvp-card-sw
 ```
 
-## Example
+## Usage & Example
 
-[test.js](https://github.com/MUedsa/taffy-pvp-card-sw/blob/main/test/test.js)
+see [test.js](https://github.com/MUedsa/taffy-pvp-card-sw/blob/main/test/test.js)
