@@ -6,7 +6,9 @@
 
 ## Usage
 
-`npm install https://github.com/MUedsa/taffy-pvp-card-sw`
+```
+npm install https://github.com/MUedsa/taffy-pvp-card-sw
+```
 
 ## Example
 
