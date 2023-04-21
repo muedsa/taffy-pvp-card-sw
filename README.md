@@ -4,7 +4,7 @@
 
 ![Test Image](test/test.png)
 
-## Usage
+## Install
 
 ```
 npm install https://github.com/MUedsa/taffy-pvp-card-sw
