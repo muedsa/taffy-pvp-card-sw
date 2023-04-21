@@ -15,7 +15,7 @@ const rawImageDirPath = resolve(
 
 const colorComponentMinValue = 0;
 const colorComponentMaxValue = 255;
-const dartScaleFactor = 0.7;
+const darkScaleFactor = 0.7;
 
 function convertToHexColor(r, g, b) {
   let rhex = r.toString(16);
@@ -88,9 +88,9 @@ const filenames = fs
   .filter((filename) => filename.endsWith(".png"));
 colorKeys.forEach((colorKey) => {
   const color = backgroupColors[colorKey];
-  const r = getScaledColorComponent(convertToRed(color), dartScaleFactor);
-  const g = getScaledColorComponent(convertToGreen(color), dartScaleFactor);
-  const b = getScaledColorComponent(convertToBlue(color), dartScaleFactor);
+  const r = getScaledColorComponent(convertToRed(color), darkScaleFactor);
+  const g = getScaledColorComponent(convertToGreen(color), darkScaleFactor);
+  const b = getScaledColorComponent(convertToBlue(color), darkScaleFactor);
   console.log(`${colorKey}: ${color} -> ${convertToHexColor(r, g, b)}`);
   filenames.forEach((filename) => {
     generateImage(filename, colorKey, r, g, b);
