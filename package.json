@@ -7,8 +7,8 @@
     "build": "prettier --write . & gulp",
     "test": "gulp & prettier --write ./test & node test/test",
     "prettier": "prettier --write .",
-    "build-asset-image": "gulp & node ./scripts/generate-asset-image",
-    "build-lib-data": "node ./scripts/generate-lib-data & prettier --write ./src/data"
+    "build-asset-image": "gulp & node ./scripts/generate-asset-image & gulp",
+    "build-lib-data": "node ./scripts/generate-lib-data & prettier --write ./src/data & gulp"
   },
   "keywords": [
     "genshin",
