@@ -2,6 +2,10 @@
   "name": "taffy-pvp-card-sw",
   "version": "0.0.2",
   "description": "Genshin PVP Card Generator",
+  "private": true,
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "build": "prettier --write . & gulp",
