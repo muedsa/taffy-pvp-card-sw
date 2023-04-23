@@ -7,7 +7,7 @@
 ## Install
 
 ```
-npm install https://github.com/MUedsa/taffy-pvp-card-sw
+npm install https://github.com/muedsa/taffy-pvp-card-sw
 ```
 
 ## Usage & Example
