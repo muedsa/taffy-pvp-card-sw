@@ -99,7 +99,7 @@ function buildCharacterData(uid, playerInfo, avatarInfo) {
 }
 
 https
-  .get("https://enka.network/api/uid/100298383", (response) => {
+  .get("https://enka.network/api/uid/101745173", (response) => {
     let responseBody = "";
     response.on("data", (data) => {
       responseBody += data;
