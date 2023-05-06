@@ -136,8 +136,7 @@ function getWeaponName(weaponId, lang) {
 }
 exports.getWeaponName = getWeaponName;
 function getReliquarySetId(reliquaryId) {
-    var _a;
-    return (_a = reliquaries_1.reliquaries[reliquaryId]) === null || _a === void 0 ? void 0 : _a.setId;
+    return reliquaries_1.reliquaries[reliquaryId]?.setId;
 }
 exports.getReliquarySetId = getReliquarySetId;
 function getReliquariesLoc(key, lang) {

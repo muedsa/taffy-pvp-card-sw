@@ -332,6 +332,16 @@ exports.characters = {
         element: "ice",
         image: "mika",
     },
+    10000081: {
+        nameTextMapHash: 466355514,
+        element: "grass",
+        image: "kaveh",
+    },
+    10000082: {
+        nameTextMapHash: 2984815066,
+        element: "grass",
+        image: "baizhu",
+    },
 };
 exports.fightPropLoc = {
     2000: "FIGHT_PROP_HP",

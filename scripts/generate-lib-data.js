@@ -5,7 +5,7 @@ const dataBasePath = resolve(__dirname, "..", "src", "data");
 
 // weapons
 
-const weaponsJsonData = require("../../GenshenData/ExcelBinOutput/WeaponExcelConfigData.json");
+const weaponsJsonData = require("../../GenshinData/ExcelBinOutput/WeaponExcelConfigData.json");
 
 let weaponFileData = `export type WeaponsProps = {
   [key: number]: {
@@ -29,24 +29,24 @@ fs.writeFileSync(resolve(dataBasePath, "weapons.ts"), weaponFileData);
 
 // reliquaries
 
-const reliquaryJsonData = require("../../GenshenData/ExcelBinOutput/ReliquaryExcelConfigData.json");
-const reliquarySetJsonData = require("../../GenshenData/ExcelBinOutput/ReliquarySetExcelConfigData.json");
-const equipAffixJsonData = require("../../GenshenData/ExcelBinOutput/EquipAffixExcelConfigData.json");
-const enTextMapHash = require("../../GenshenData/TextMap/TextMapEN.json");
-const ruTextMapHash = require("../../GenshenData/TextMap/TextMapRU.json");
-const viTextMapHash = require("../../GenshenData/TextMap/TextMapVI.json");
-const thTextMapHash = require("../../GenshenData/TextMap/TextMapTH.json");
-const ptTextMapHash = require("../../GenshenData/TextMap/TextMapPT.json");
-const krTextMapHash = require("../../GenshenData/TextMap/TextMapKR.json");
-const jpTextMapHash = require("../../GenshenData/TextMap/TextMapJP.json");
-const idTextMapHash = require("../../GenshenData/TextMap/TextMapID.json");
-const frTextMapHash = require("../../GenshenData/TextMap/TextMapFR.json");
-const esTextMapHash = require("../../GenshenData/TextMap/TextMapES.json");
-const deTextMapHash = require("../../GenshenData/TextMap/TextMapDE.json");
-const chsTextMapHash = require("../../GenshenData/TextMap/TextMapCHS.json");
-const chtTextMapHash = require("../../GenshenData/TextMap/TextMapCHS.json");
-const itTextMapHash = require("../../GenshenData/TextMap/TextMapIT.json");
-const trTextMapHash = require("../../GenshenData/TextMap/TextMapTR.json");
+const reliquaryJsonData = require("../../GenshinData/ExcelBinOutput/ReliquaryExcelConfigData.json");
+const reliquarySetJsonData = require("../../GenshinData/ExcelBinOutput/ReliquarySetExcelConfigData.json");
+const equipAffixJsonData = require("../../GenshinData/ExcelBinOutput/EquipAffixExcelConfigData.json");
+const enTextMapHash = require("../../GenshinData/TextMap/TextMapEN.json");
+const ruTextMapHash = require("../../GenshinData/TextMap/TextMapRU.json");
+const viTextMapHash = require("../../GenshinData/TextMap/TextMapVI.json");
+const thTextMapHash = require("../../GenshinData/TextMap/TextMapTH.json");
+const ptTextMapHash = require("../../GenshinData/TextMap/TextMapPT.json");
+const krTextMapHash = require("../../GenshinData/TextMap/TextMapKR.json");
+const jpTextMapHash = require("../../GenshinData/TextMap/TextMapJP.json");
+const idTextMapHash = require("../../GenshinData/TextMap/TextMapID.json");
+const frTextMapHash = require("../../GenshinData/TextMap/TextMapFR.json");
+const esTextMapHash = require("../../GenshinData/TextMap/TextMapES.json");
+const deTextMapHash = require("../../GenshinData/TextMap/TextMapDE.json");
+const chsTextMapHash = require("../../GenshinData/TextMap/TextMapCHS.json");
+const chtTextMapHash = require("../../GenshinData/TextMap/TextMapCHS.json");
+const itTextMapHash = require("../../GenshinData/TextMap/TextMapIT.json");
+const trTextMapHash = require("../../GenshinData/TextMap/TextMapTR.json");
 
 let reliquariesFileData = `
 export type ReliquariesProps = {

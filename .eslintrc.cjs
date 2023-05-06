@@ -14,6 +14,6 @@ module.exports = {
   ],
   env: {
     node: true,
-    es2018: true,
+    es2022: true,
   },
 };
