@@ -33,6 +33,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@napi-rs/canvas": "^0.1.40"
+    "@napi-rs/canvas": "^0.1.41"
   }
 }
