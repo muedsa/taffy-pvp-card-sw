@@ -237,6 +237,11 @@ exports.characters = {
         element: "water",
         image: "yelan",
     },
+    10000061: {
+        nameTextMapHash: 1456643042,
+        element: "grass",
+        image: "kirara",
+    },
     10000062: {
         nameTextMapHash: 3689108098,
         element: "ice",
