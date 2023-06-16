@@ -674,6 +674,10 @@ export const weapons: WeaponsProps = {
     type: "WEAPON_BOW",
     nameTextMapHash: 3063191787,
   },
+  15419: {
+    type: "WEAPON_BOW",
+    nameTextMapHash: 316078811,
+  },
   15501: {
     type: "WEAPON_BOW",
     nameTextMapHash: 3933622347,
