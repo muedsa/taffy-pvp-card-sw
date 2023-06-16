@@ -1,6 +1,6 @@
-import { StringStringProps } from ".";
+import { StringStringProps } from "./types";
 
-export const backgroupColors: StringStringProps = {
+export const backgroundColors: StringStringProps = {
   fire: "#e59865",
   water: "#48b8d0",
   wind: "#629099",

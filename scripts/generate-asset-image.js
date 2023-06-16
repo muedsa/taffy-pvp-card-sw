@@ -1,9 +1,10 @@
+// XXX: 理论上能用 canvas globalCompositeOperation 来实现，如果可以这个文件就不需要了
 const { resolve } = require("node:path");
 const fs = require("node:fs");
 const { loadImage, createCanvas, ImageData } = require("@napi-rs/canvas");
-const { backgroupColors } = require("../dist/data/colors");
+const { backgroundColors } = require("../dist/data/colors");
 
-const colorKeys = Object.keys(backgroupColors);
+const colorKeys = Object.keys(backgroundColors);
 const rawImageDirPath = resolve(
   __dirname,
   "..",
@@ -87,7 +88,7 @@ const filenames = fs
   .readdirSync(rawImageDirPath)
   .filter((filename) => filename.endsWith(".png"));
 colorKeys.forEach((colorKey) => {
-  const color = backgroupColors[colorKey];
+  const color = backgroundColors[colorKey];
   const r = getScaledColorComponent(convertToRed(color), darkScaleFactor);
   const g = getScaledColorComponent(convertToGreen(color), darkScaleFactor);
   const b = getScaledColorComponent(convertToBlue(color), darkScaleFactor);

@@ -1,32 +1,16 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getReliquarySetName = exports.getReliquariesLoc = exports.getReliquarySetId = exports.getWeaponName = exports.getWeaponImagePath = exports.getLoc = exports.getFightPropText = exports.getCharacterPropText = exports.getReliquaryPropImagePath = exports.getReliquaryImagePath = exports.getCharacterMasterElementDamageProp = exports.getCharacterPropLoc = exports.getFightPropLoc = exports.getCharacterPropImagePath = exports.getCharacterImagePath = exports.getBgColor = exports.getCharacterElement = exports.getAssetFontPath = void 0;
-const node_fs_1 = __importDefault(require("node:fs"));
 const path_1 = require("path");
 const colors_1 = require("./data/colors");
-const image_1 = require("./data/image");
+const imagePath_1 = require("./data/imagePath");
 const characters_1 = require("./data/characters");
 const loc_1 = require("./data/loc");
 const weapons_1 = require("./data/weapons");
 const reliquaries_1 = require("./data/reliquaries");
 const reliquary_set_1 = require("./data/reliquary-set");
 const reliquaries_loc_1 = require("./data/reliquaries-loc");
-function findDir(...paths) {
-    if (paths.length > 3) {
-        throw new Error("not found necessary dir");
-    }
-    const dirPaht = (0, path_1.resolve)(__dirname, ...paths);
-    if (!node_fs_1.default.existsSync(dirPaht)) {
-        return findDir("..", ...paths);
-    }
-    else {
-        return dirPaht;
-    }
-}
-const assetPath = findDir("asset");
+const assetPath = (0, path_1.resolve)(__dirname, "../asset");
 function getAssetFontPath(filename) {
     return assetPath + "/font/" + filename;
 }
@@ -37,7 +21,7 @@ function getCharacterElement(avatarId) {
 exports.getCharacterElement = getCharacterElement;
 function getBgColor(avatarId) {
     const element = getCharacterElement(avatarId);
-    return colors_1.backgroupColors[element];
+    return colors_1.backgroundColors[element];
 }
 exports.getBgColor = getBgColor;
 function getCharacterImagePath(avatarId) {
@@ -45,7 +29,7 @@ function getCharacterImagePath(avatarId) {
 }
 exports.getCharacterImagePath = getCharacterImagePath;
 function getCharacterPropImagePath(propId) {
-    return assetPath + image_1.characterPropImagePaths[propId];
+    return assetPath + imagePath_1.characterPropImagePaths[propId];
 }
 exports.getCharacterPropImagePath = getCharacterPropImagePath;
 function getFightPropLoc(propId, lang) {
@@ -71,7 +55,7 @@ function getReliquaryImagePath(type, avatarId) {
 }
 exports.getReliquaryImagePath = getReliquaryImagePath;
 function getReliquaryPropImagePath(propId) {
-    return assetPath + image_1.reliquaryPropImagePaths[propId];
+    return assetPath + imagePath_1.reliquaryPropImagePaths[propId];
 }
 exports.getReliquaryPropImagePath = getReliquaryPropImagePath;
 function textPropValue(value) {
@@ -127,7 +111,7 @@ function getLoc(key, lang) {
 exports.getLoc = getLoc;
 function getWeaponImagePath(weaponId) {
     const weaponType = weapons_1.weapons[weaponId].type;
-    return assetPath + image_1.weaponImagePaths[weaponType];
+    return assetPath + imagePath_1.weaponImagePaths[weaponType];
 }
 exports.getWeaponImagePath = getWeaponImagePath;
 function getWeaponName(weaponId, lang) {

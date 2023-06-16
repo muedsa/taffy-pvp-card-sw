@@ -89,10 +89,10 @@ export interface CardConfig {
     | "tr";
   fontFamily: string;
   specialFontFamilies?: CardFontConfig;
-  customeFonts?: CustomeFonts[];
+  customFonts?: CustomFonts[];
 }
 
-export interface CustomeFonts {
+export interface CustomFonts {
   fontPath: string;
   fontFamily: string;
 }

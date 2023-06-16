@@ -10,19 +10,11 @@ gulp.task("clean", () =>
   gulp.src(outDir, { read: false, allowEmpty: true }).pipe(clean(outDir))
 );
 
-gulp.task("asset", () =>
-  gulp.src("./asset/**").pipe(gulp.dest(outDir + "/asset"))
-);
-
 gulp.task("build", () =>
   tsProject.src().pipe(tsProject()).pipe(gulp.dest(outDir))
 );
 
 gulp.task(
   "default",
-  gulp.series(
-    gulp.parallel("clean"),
-    gulp.parallel("asset"),
-    gulp.parallel("build")
-  )
+  gulp.series(gulp.parallel("clean"), gulp.parallel("build"))
 );

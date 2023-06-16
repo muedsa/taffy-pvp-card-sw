@@ -1,3 +1,4 @@
+// TODO: delete it!
 const { resolve } = require("node:path");
 const fs = require("node:fs");
 

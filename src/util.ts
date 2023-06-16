@@ -1,11 +1,10 @@
-import fs from "node:fs";
 import { resolve } from "path";
-import { backgroupColors } from "./data/colors";
+import { backgroundColors } from "./data/colors";
 import {
   characterPropImagePaths,
   reliquaryPropImagePaths,
   weaponImagePaths,
-} from "./data/image";
+} from "./data/imagePath";
 import {
   characters,
   fightPropLoc,
@@ -18,19 +17,7 @@ import { reliquaries } from "./data/reliquaries";
 import { reliquarySet } from "./data/reliquary-set";
 import { reliquariesLoc } from "./data/reliquaries-loc";
 
-function findDir(...paths: string[]): string {
-  if (paths.length > 3) {
-    throw new Error("not found necessary dir");
-  }
-  const dirPaht = resolve(__dirname, ...paths);
-  if (!fs.existsSync(dirPaht)) {
-    return findDir("..", ...paths);
-  } else {
-    return dirPaht;
-  }
-}
-
-const assetPath = findDir("asset");
+const assetPath = resolve(__dirname, "../asset");
 
 export function getAssetFontPath(filename: string): string {
   return assetPath + "/font/" + filename;
@@ -42,7 +29,7 @@ export function getCharacterElement(avatarId: number): string {
 
 export function getBgColor(avatarId: number): string {
   const element = getCharacterElement(avatarId);
-  return backgroupColors[element];
+  return backgroundColors[element];
 }
 
 export function getCharacterImagePath(avatarId: number): string {

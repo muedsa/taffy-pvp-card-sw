@@ -47,9 +47,9 @@ export interface CardConfig {
     lang: "en" | "ru" | "vi" | "th" | "pt" | "kr" | "jp" | "id" | "fr" | "es" | "de" | "zh-CN" | "zh-TW" | "it" | "tr";
     fontFamily: string;
     specialFontFamilies?: CardFontConfig;
-    customeFonts?: CustomeFonts[];
+    customFonts?: CustomFonts[];
 }
-export interface CustomeFonts {
+export interface CustomFonts {
     fontPath: string;
     fontFamily: string;
 }
