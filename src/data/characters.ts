@@ -1,4 +1,4 @@
-import { NumberStringProps, StringNumberProps } from ".";
+import { NumberStringProps, StringNumberProps } from "./types";
 
 export type CharactersProps = {
   [key: number]: {

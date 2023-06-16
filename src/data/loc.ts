@@ -1,4 +1,4 @@
-import { LocProps } from ".";
+import { LocProps } from "./types";
 
 // from https://github.com/EnkaNetwork/API-docs/blob/master/store/loc.json
 export const loc: LocProps = {

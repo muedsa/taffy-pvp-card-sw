@@ -1,2 +1,2 @@
-import { LocProps } from ".";
+import { LocProps } from "./types";
 export declare const loc: LocProps;

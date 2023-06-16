@@ -1,2 +1,2 @@
-import { StringStringProps } from ".";
-export declare const backgroupColors: StringStringProps;
+import { StringStringProps } from "./types";
+export declare const backgroundColors: StringStringProps;

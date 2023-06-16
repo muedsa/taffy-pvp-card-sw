@@ -5,3 +5,4 @@ dist
 package-lock.json
 .idea
 .vscode
+taffy_pvp_card_cache

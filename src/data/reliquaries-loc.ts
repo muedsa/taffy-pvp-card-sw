@@ -1,4 +1,4 @@
-import { LocProps } from ".";
+import { LocProps } from "./types";
 
 export const reliquariesLoc: LocProps = {
   en: {

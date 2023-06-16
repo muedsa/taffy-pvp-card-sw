@@ -12,6 +12,9 @@ module.exports = {
       },
     },
   ],
+  parserOptions: {
+    sourceType: "module",
+  },
   env: {
     node: true,
     es2022: true,

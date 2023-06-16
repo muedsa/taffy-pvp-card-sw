@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.backgroupColors = void 0;
-exports.backgroupColors = {
+exports.backgroundColors = void 0;
+exports.backgroundColors = {
     fire: "#e59865",
     water: "#48b8d0",
     wind: "#629099",

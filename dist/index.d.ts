@@ -1,4 +1,3 @@
-import { Canvas } from "@napi-rs/canvas";
-import { CardConfig, Character } from "./types";
-export declare const defaultCardConfig: CardConfig;
-export declare function generateCard(character: Character, config?: CardConfig): Promise<Canvas>;
+export { generateCard } from "./taffyPvpCard";
+export { defaultCardConfig as cardConfig } from "./config";
+export { parseCharacterData } from "./parseCharacterData";
