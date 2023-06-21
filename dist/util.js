@@ -1,22 +1,29 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getReliquarySetName = exports.getReliquariesLoc = exports.getReliquarySetId = exports.getWeaponName = exports.getWeaponImagePath = exports.getLoc = exports.getFightPropText = exports.getCharacterPropText = exports.getReliquaryPropImagePath = exports.getReliquaryImagePath = exports.getCharacterMasterElementDamageProp = exports.getCharacterPropLoc = exports.getFightPropLoc = exports.getCharacterPropImagePath = exports.getCharacterImagePath = exports.getBgColor = exports.getCharacterElement = exports.getAssetFontPath = void 0;
+exports.getReliquarySetName = exports.getReliquariesLoc = exports.getReliquarySetId = exports.getWeaponName = exports.getWeaponImagePath = exports.getLoc = exports.getFightPropText = exports.getCharacterPropText = exports.getReliquaryPropImagePath = exports.getReliquaryImagePath = exports.getCharacterMasterElementDamageProp = exports.getCharacterPropLoc = exports.getFightPropLoc = exports.getCharacterPropImagePath = exports.getCharacterImagePath = exports.getBgColor = exports.getCharacterElement = exports.fileExists = void 0;
+const node_fs_1 = require("node:fs");
+const promises_1 = __importDefault(require("node:fs/promises"));
 const path_1 = require("path");
+const cache_1 = require("./cache");
 const colors_1 = require("./data/colors");
+const damageProp_1 = require("./data/damageProp");
 const imagePath_1 = require("./data/imagePath");
-const characters_1 = require("./data/characters");
-const loc_1 = require("./data/loc");
-const weapons_1 = require("./data/weapons");
-const reliquaries_1 = require("./data/reliquaries");
-const reliquary_set_1 = require("./data/reliquary-set");
-const reliquaries_loc_1 = require("./data/reliquaries-loc");
 const assetPath = (0, path_1.resolve)(__dirname, "../asset");
-function getAssetFontPath(filename) {
-    return assetPath + "/font/" + filename;
+async function fileExists(path) {
+    try {
+        await promises_1.default.access(path, node_fs_1.constants.F_OK);
+        return true;
+    }
+    catch (e) {
+        return false;
+    }
 }
-exports.getAssetFontPath = getAssetFontPath;
+exports.fileExists = fileExists;
 function getCharacterElement(avatarId) {
-    return characters_1.characters[avatarId].element;
+    return (0, cache_1.getCache)("characters")[avatarId].element;
 }
 exports.getCharacterElement = getCharacterElement;
 function getBgColor(avatarId) {
@@ -25,7 +32,10 @@ function getBgColor(avatarId) {
 }
 exports.getBgColor = getBgColor;
 function getCharacterImagePath(avatarId) {
-    return assetPath + "/image/splash/" + characters_1.characters[avatarId].image + ".png";
+    return (assetPath +
+        "/image/splash/" +
+        (0, cache_1.getCache)("characters")[avatarId].image +
+        ".png");
 }
 exports.getCharacterImagePath = getCharacterImagePath;
 function getCharacterPropImagePath(propId) {
@@ -33,16 +43,16 @@ function getCharacterPropImagePath(propId) {
 }
 exports.getCharacterPropImagePath = getCharacterPropImagePath;
 function getFightPropLoc(propId, lang) {
-    return loc_1.loc[lang][propId];
+    return (0, cache_1.getCache)("loc")[lang][propId];
 }
 exports.getFightPropLoc = getFightPropLoc;
 function getCharacterPropLoc(propId, lang) {
-    return getFightPropLoc(characters_1.fightPropLoc[propId], lang);
+    return getFightPropLoc(damageProp_1.fightPropLoc[propId], lang);
 }
 exports.getCharacterPropLoc = getCharacterPropLoc;
 function getCharacterMasterElementDamageProp(avatarId) {
     const element = getCharacterElement(avatarId);
-    return characters_1.characterMasterElementDamageProp[element];
+    return damageProp_1.characterMasterElementDamageProp[element];
 }
 exports.getCharacterMasterElementDamageProp = getCharacterMasterElementDamageProp;
 function getReliquaryImagePath(type, avatarId) {
@@ -106,29 +116,29 @@ function getFightPropText(prop) {
 }
 exports.getFightPropText = getFightPropText;
 function getLoc(key, lang) {
-    return loc_1.loc[lang][key];
+    return (0, cache_1.getCache)("loc")[lang][key];
 }
 exports.getLoc = getLoc;
 function getWeaponImagePath(weaponId) {
-    const weaponType = weapons_1.weapons[weaponId].type;
+    const weaponType = (0, cache_1.getCache)("weapons")[weaponId].type;
     return assetPath + imagePath_1.weaponImagePaths[weaponType];
 }
 exports.getWeaponImagePath = getWeaponImagePath;
 function getWeaponName(weaponId, lang) {
-    const nameTextMapHash = weapons_1.weapons[weaponId].nameTextMapHash;
+    const nameTextMapHash = (0, cache_1.getCache)("weapons")[weaponId].nameTextMapHash;
     return getLoc(nameTextMapHash.toString(), lang);
 }
 exports.getWeaponName = getWeaponName;
 function getReliquarySetId(reliquaryId) {
-    return reliquaries_1.reliquaries[reliquaryId]?.setId;
+    return (0, cache_1.getCache)("reliquaries")[reliquaryId]?.setId;
 }
 exports.getReliquarySetId = getReliquarySetId;
 function getReliquariesLoc(key, lang) {
-    return reliquaries_loc_1.reliquariesLoc[lang][key];
+    return (0, cache_1.getCache)("reliquaries-loc")[lang][key];
 }
 exports.getReliquariesLoc = getReliquariesLoc;
 function getReliquarySetName(setId, lang) {
-    const nameTextMapHash = reliquary_set_1.reliquarySet[setId].nameTextMapHash;
+    const nameTextMapHash = (0, cache_1.getCache)("reliquary-set")[setId].nameTextMapHash;
     return getReliquariesLoc(nameTextMapHash.toString(), lang);
 }
 exports.getReliquarySetName = getReliquarySetName;

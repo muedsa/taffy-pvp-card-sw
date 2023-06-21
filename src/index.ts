@@ -1,3 +1,4 @@
 export { generateCard } from "./taffyPvpCard";
-export { defaultCardConfig as cardConfig } from "./config";
+export { cardConfig, globalConfig } from "./config";
 export { parseCharacterData } from "./parseCharacterData";
+export { updateCache } from "./cache";

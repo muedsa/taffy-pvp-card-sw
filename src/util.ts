@@ -1,30 +1,32 @@
+import { constants } from "node:fs";
+import fs from "node:fs/promises";
 import { resolve } from "path";
+import { getCache } from "./cache";
 import { backgroundColors } from "./data/colors";
+import {
+  characterMasterElementDamageProp,
+  fightPropLoc,
+} from "./data/damageProp";
 import {
   characterPropImagePaths,
   reliquaryPropImagePaths,
   weaponImagePaths,
 } from "./data/imagePath";
-import {
-  characters,
-  fightPropLoc,
-  characterMasterElementDamageProp,
-} from "./data/characters";
-import { loc } from "./data/loc";
 import { FightProp } from "./types";
-import { weapons } from "./data/weapons";
-import { reliquaries } from "./data/reliquaries";
-import { reliquarySet } from "./data/reliquary-set";
-import { reliquariesLoc } from "./data/reliquaries-loc";
 
 const assetPath = resolve(__dirname, "../asset");
 
-export function getAssetFontPath(filename: string): string {
-  return assetPath + "/font/" + filename;
+export async function fileExists(path: string): Promise<boolean> {
+  try {
+    await fs.access(path, constants.F_OK);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 export function getCharacterElement(avatarId: number): string {
-  return characters[avatarId].element;
+  return getCache("characters")[avatarId].element;
 }
 
 export function getBgColor(avatarId: number): string {
@@ -33,7 +35,12 @@ export function getBgColor(avatarId: number): string {
 }
 
 export function getCharacterImagePath(avatarId: number): string {
-  return assetPath + "/image/splash/" + characters[avatarId].image + ".png";
+  return (
+    assetPath +
+    "/image/splash/" +
+    getCache("characters")[avatarId].image +
+    ".png"
+  );
 }
 
 export function getCharacterPropImagePath(propId: number): string {
@@ -41,7 +48,7 @@ export function getCharacterPropImagePath(propId: number): string {
 }
 
 export function getFightPropLoc(propId: string, lang: string): string {
-  return loc[lang][propId];
+  return getCache("loc")[lang][propId];
 }
 
 export function getCharacterPropLoc(propId: number, lang: string): string {
@@ -118,28 +125,28 @@ export function getFightPropText(prop: FightProp): string {
 }
 
 export function getLoc(key: string, lang: string): string {
-  return loc[lang][key];
+  return getCache("loc")[lang][key];
 }
 
 export function getWeaponImagePath(weaponId: number): string {
-  const weaponType = weapons[weaponId].type;
+  const weaponType = getCache("weapons")[weaponId].type;
   return assetPath + weaponImagePaths[weaponType];
 }
 
 export function getWeaponName(weaponId: number, lang: string): string {
-  const nameTextMapHash = weapons[weaponId].nameTextMapHash;
+  const nameTextMapHash = getCache("weapons")[weaponId].nameTextMapHash;
   return getLoc(nameTextMapHash.toString(), lang);
 }
 
 export function getReliquarySetId(reliquaryId: number): number | undefined {
-  return reliquaries[reliquaryId]?.setId;
+  return getCache("reliquaries")[reliquaryId]?.setId;
 }
 
 export function getReliquariesLoc(key: string, lang: string): string {
-  return reliquariesLoc[lang][key];
+  return getCache("reliquaries-loc")[lang][key];
 }
 
 export function getReliquarySetName(setId: number, lang: string): string {
-  const nameTextMapHash = reliquarySet[setId].nameTextMapHash;
+  const nameTextMapHash = getCache("reliquary-set")[setId].nameTextMapHash;
   return getReliquariesLoc(nameTextMapHash.toString(), lang);
 }

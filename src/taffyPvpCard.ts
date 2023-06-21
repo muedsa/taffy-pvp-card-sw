@@ -6,19 +6,24 @@ import {
 } from "@napi-rs/canvas";
 import { CardConfig, Character } from "./types";
 import { getBgColor } from "./util";
-import { cardHeight, cardWidth, defaultCardConfig } from "./config";
+import { cardHeight, cardWidth, cardConfig } from "./config";
 import {
   drawCharacter,
   drawCharacterProps,
   drawReliquaries,
   drawWeapon,
 } from "./draw";
+import { checkCache } from "./cache";
+
+const registerFontSet = new Set<string>();
 
 function registerCustomFonts(config: CardConfig) {
   if (Array.isArray(config.customFonts)) {
-    config.customFonts.forEach((font) =>
-      GlobalFonts.registerFromPath(font.fontPath, font.fontFamily)
-    );
+    config.customFonts.forEach((font) => {
+      if (registerFontSet.has(font.fontPath)) return;
+      GlobalFonts.registerFromPath(font.fontPath, font.fontFamily);
+      registerFontSet.add(font.fontPath);
+    });
   }
 }
 
@@ -31,8 +36,9 @@ function initBackground(ctx: SKRSContext2D, character: Character): string {
 
 export async function generateCard(
   character: Character,
-  config: CardConfig = defaultCardConfig
+  config: CardConfig = cardConfig
 ): Promise<Canvas> {
+  await checkCache();
   registerCustomFonts(config);
   const canvas = createCanvas(config.width, config.height);
   const ctx = canvas.getContext("2d");

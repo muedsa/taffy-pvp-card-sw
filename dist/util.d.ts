@@ -1,5 +1,5 @@
 import { FightProp } from "./types";
-export declare function getAssetFontPath(filename: string): string;
+export declare function fileExists(path: string): Promise<boolean>;
 export declare function getCharacterElement(avatarId: number): string;
 export declare function getBgColor(avatarId: number): string;
 export declare function getCharacterImagePath(avatarId: number): string;

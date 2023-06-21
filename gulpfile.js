@@ -14,7 +14,4 @@ gulp.task("build", () =>
   tsProject.src().pipe(tsProject()).pipe(gulp.dest(outDir))
 );
 
-gulp.task(
-  "default",
-  gulp.series(gulp.parallel("clean"), gulp.parallel("build"))
-);
+gulp.task("default", gulp.series("clean", "build"));
