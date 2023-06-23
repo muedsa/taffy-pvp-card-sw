@@ -1,22 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.drawText = exports.loadImageAndOffsetDraw = exports.loadImageAndDraw = void 0;
-const node_fs_1 = __importDefault(require("node:fs"));
 const canvas_1 = require("@napi-rs/canvas");
-async function exists(path) {
-    try {
-        await node_fs_1.default.promises.access(path, node_fs_1.default.constants.F_OK);
-        return true;
-    }
-    catch {
-        return false;
-    }
-}
+const util_1 = require("./util");
 async function loadImageAndDraw(ctx, path, x, y, w, h) {
-    if (!(await exists(path))) {
+    if (!(await (0, util_1.fileExists)(path))) {
         throw new Error("not exists file: " + path);
     }
     const image = await (0, canvas_1.loadImage)(path);
@@ -27,7 +15,7 @@ async function loadImageAndDraw(ctx, path, x, y, w, h) {
 }
 exports.loadImageAndDraw = loadImageAndDraw;
 async function loadImageAndOffsetDraw(ctx, path, offsetX, offsetY, x, y, w, h) {
-    if (!(await exists(path))) {
+    if (!(await (0, util_1.fileExists)(path))) {
         throw new Error("not exists file: " + path);
     }
     const image = await (0, canvas_1.loadImage)(path);

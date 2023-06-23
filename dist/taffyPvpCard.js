@@ -5,9 +5,16 @@ const canvas_1 = require("@napi-rs/canvas");
 const util_1 = require("./util");
 const config_1 = require("./config");
 const draw_1 = require("./draw");
+const cache_1 = require("./cache");
+const registerFontSet = new Set();
 function registerCustomFonts(config) {
     if (Array.isArray(config.customFonts)) {
-        config.customFonts.forEach((font) => canvas_1.GlobalFonts.registerFromPath(font.fontPath, font.fontFamily));
+        config.customFonts.forEach((font) => {
+            if (registerFontSet.has(font.fontPath))
+                return;
+            canvas_1.GlobalFonts.registerFromPath(font.fontPath, font.fontFamily);
+            registerFontSet.add(font.fontPath);
+        });
     }
 }
 function initBackground(ctx, character) {
@@ -16,7 +23,8 @@ function initBackground(ctx, character) {
     ctx.fillRect(0, 0, config_1.cardWidth, config_1.cardHeight);
     return color;
 }
-async function generateCard(character, config = config_1.defaultCardConfig) {
+async function generateCard(character, config = config_1.cardConfig) {
+    await (0, cache_1.checkCache)();
     registerCustomFonts(config);
     const canvas = (0, canvas_1.createCanvas)(config.width, config.height);
     const ctx = canvas.getContext("2d");

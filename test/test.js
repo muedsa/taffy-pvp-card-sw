@@ -1,5 +1,5 @@
 const fs = require("node:fs");
-const { resolve } = require("node:path");
+const path = require("node:path");
 const cp = require("node:child_process");
 const { createCanvas } = require("@napi-rs/canvas");
 const fetch = require("node-fetch");
@@ -36,7 +36,7 @@ const test = async () => {
         ctx.drawImage(cardCanvas, x, y);
       });
       fs.writeFileSync(
-        resolve(__dirname, "test.png"),
+        path.resolve(__dirname, "test.png"),
         canvas.toBuffer("image/png")
       );
       const url = canvas.toDataURL("image/png");

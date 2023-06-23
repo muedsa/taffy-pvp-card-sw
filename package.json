@@ -1,6 +1,6 @@
 {
   "name": "taffy-pvp-card-sw",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Genshin PVP Card Generator",
   "private": true,
   "files": [
@@ -12,8 +12,7 @@
     "build": "prettier --write . & gulp",
     "test": "gulp & prettier --write ./test & node test/test",
     "prettier": "prettier --write .",
-    "build-asset-image": "gulp & node ./scripts/generate-asset-image & gulp",
-    "build-lib-data": "node ./scripts/generate-lib-data & prettier --write ./src/data & gulp"
+    "build-asset-image": "gulp & node ./scripts/generate-asset-image & gulp"
   },
   "keywords": [
     "genshin",
@@ -24,6 +23,7 @@
   "repository": "https://github.com/MUedsa/taffy-pvp-card-sw",
   "devDependencies": {
     "@types/node": "^20.3.1",
+    "@types/node-fetch": "^2.6.4",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
     "eslint": "^8.43.0",
