@@ -26,3 +26,4 @@ jobs:
         run: |
           npm install
           gulp
+          node ./test/test.js
