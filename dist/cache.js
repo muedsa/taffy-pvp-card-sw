@@ -41,6 +41,8 @@ async function setCache(fileName, value) {
     }
     cacheMap.set(fileName, typeof value === "string" ? JSON.parse(value) : value);
 }
+// 更新缓存，默认为从远端刷新所有
+// checkCache 模式下只会获取本地缓存没有的
 async function updateCache(updateRemote = true) {
     const tasks = fileList.map((name) => (async () => {
         if (!updateRemote && (await (0, util_1.fileExists)(getCacheFilePath(name)))) {
@@ -51,7 +53,7 @@ async function updateCache(updateRemote = true) {
         else {
             const meta = await (0, node_fetch_1.default)(`https://raw.githubusercontent.com/zcWSR/taffy-pvp-card-ds/master/data/${name}.json`);
             logger.info(`fetching ${name}.json`);
-            await setCache(name, await meta.json());
+            await setCache(name, (await meta.json()));
         }
     })());
     loadingPromise = Promise.all(tasks);
@@ -59,6 +61,7 @@ async function updateCache(updateRemote = true) {
     loadingPromise = null;
 }
 exports.updateCache = updateCache;
+// 每次 generateCard 都会执行，如果此时正在 updateCache 则会等待
 async function checkCache() {
     if (loadingPromise)
         return loadingPromise;

@@ -62,7 +62,7 @@ export async function updateCache(updateRemote = true) {
           `https://raw.githubusercontent.com/zcWSR/taffy-pvp-card-ds/master/data/${name}.json`
         );
         logger.info(`fetching ${name}.json`);
-        await setCache(name, await meta.json() as object);
+        await setCache(name, (await meta.json()) as object);
       }
     })()
   );

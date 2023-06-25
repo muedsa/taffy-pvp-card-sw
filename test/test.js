@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const cp = require("node:child_process");
+// const cp = require("node:child_process");
 const { createCanvas } = require("@napi-rs/canvas");
 const fetch = require("node-fetch");
 const { generateCard, cardConfig, parseCharacterData } = require("../dist");
@@ -39,18 +39,19 @@ const test = async () => {
         path.resolve(__dirname, "test.png"),
         canvas.toBuffer("image/png")
       );
-      const url = canvas.toDataURL("image/png");
-      switch (process.platform) {
-        case "linux":
-          cp.exec(`echo "${url}" | xclip -selection clipboard`);
-          console.log("xclip!");
-          break;
-        case "win32":
-          cp.exec("clip").stdin.end(url);
-          console.log("clip!");
-          break;
-        default:
-      }
+      // too long url: spawn E2BIG
+      // const url = canvas.toDataURL("image/png");
+      // switch (process.platform) {
+      //   case "linux":
+      //     cp.exec(`echo "${url}" | xclip -selection clipboard`);
+      //     console.log("xclip!");
+      //     break;
+      //   case "win32":
+      //     cp.exec("clip").stdin.end(url);
+      //     console.log("clip!");
+      //     break;
+      //   default:
+      // }
     } catch (error) {
       console.log(JSON.stringify(characterDataList, null, "\t"));
       throw error;
