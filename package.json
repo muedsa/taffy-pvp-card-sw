@@ -31,7 +31,7 @@
     "gulp-clean": "^0.4.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "prettier": "2.8.8",
-    "typescript": "^5.1.5"
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.41",
