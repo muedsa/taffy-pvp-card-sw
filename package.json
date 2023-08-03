@@ -30,7 +30,7 @@
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-typescript": "^6.0.0-alpha.1",
-    "prettier": "3.0.0",
+    "prettier": "3.0.1",
     "typescript": "^5.1.6"
   },
   "dependencies": {
