@@ -34,7 +34,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@napi-rs/canvas": "^0.1.41",
+    "@napi-rs/canvas": "^0.1.42",
     "node-fetch": "^2.6.11 <3.0"
   }
 }
