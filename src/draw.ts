@@ -33,7 +33,7 @@ import * as size from "./size";
 export async function drawCharacter(
   ctx: SKRSContext2D,
   config: CardConfig,
-  character: Character
+  character: Character,
 ) {
   const characterImagePath = getCharacterImagePath(character.id);
   const skillsText = character.skills.join("-");
@@ -45,7 +45,7 @@ export async function drawCharacter(
     size.characterImageX,
     size.characterImageY,
     size.characterImageSize,
-    size.characterImageSize
+    size.characterImageSize,
   );
 
   // owner
@@ -59,7 +59,7 @@ export async function drawCharacter(
         size.ownerTextY,
         size.ownerTextFontSize,
         size.ownerTextFontColor,
-        config.specialFontFamilies?.ownerTextFontFamily || config.fontFamily
+        config.specialFontFamilies?.ownerTextFontFamily || config.fontFamily,
       );
     }
     // name
@@ -73,7 +73,7 @@ export async function drawCharacter(
           : size.ownerTextY,
         size.ownerTextFontSize,
         size.ownerTextFontColor,
-        config.specialFontFamilies?.ownerTextFontFamily || config.fontFamily
+        config.specialFontFamilies?.ownerTextFontFamily || config.fontFamily,
       );
     }
   }
@@ -88,7 +88,7 @@ export async function drawCharacter(
     size.characterLevelTextFontColor,
     config.specialFontFamilies?.characterLevelTextFontFamily ||
       config.fontFamily,
-    "right"
+    "right",
   );
 
   // skill level
@@ -100,7 +100,7 @@ export async function drawCharacter(
     size.characterSkillsTextFontSize,
     size.characterSkillsTextFontColor,
     config.specialFontFamilies?.characterSkillsTextFontFamily ||
-      config.fontFamily
+      config.fontFamily,
   );
 
   // talent
@@ -114,7 +114,7 @@ export async function drawCharacter(
       size.characterTalentTextFontColor,
       config.specialFontFamilies?.characterTalentTextFontFamily ||
         config.fontFamily,
-      "right"
+      "right",
     );
   }
 
@@ -124,7 +124,7 @@ export async function drawCharacter(
 export async function drawCharacterProps(
   ctx: SKRSContext2D,
   config: CardConfig,
-  character: Character
+  character: Character,
 ) {
   const baseProps = [2000, 2001, 2002, 20, 22, 23, 28];
   for (let i = 0; i < baseProps.length; i++) {
@@ -133,7 +133,7 @@ export async function drawCharacterProps(
       config,
       character.fightPropMap,
       baseProps[i],
-      i
+      i,
     );
   }
   await drawCharacterProp(
@@ -141,7 +141,7 @@ export async function drawCharacterProps(
     config,
     character.fightPropMap,
     getCharacterMasterElementDamageProp(character.id),
-    baseProps.length
+    baseProps.length,
   );
   return;
 }
@@ -151,7 +151,7 @@ async function drawCharacterProp(
   config: CardConfig,
   fightPropMap: FightPropMap,
   propId: number,
-  propPosition: number
+  propPosition: number,
 ) {
   const imageX = size.characterPropImageX;
   const imageY =
@@ -176,7 +176,7 @@ async function drawCharacterProp(
     imageX,
     imageY,
     size.characterPropImageSize,
-    size.characterPropImageSize
+    size.characterPropImageSize,
   );
 
   // prop text
@@ -189,7 +189,8 @@ async function drawCharacterProp(
     textY,
     size.characterPropTextFontSize,
     size.characterPropTextFontColor,
-    config.specialFontFamilies?.characterPropTextFontFamily || config.fontFamily
+    config.specialFontFamilies?.characterPropTextFontFamily ||
+      config.fontFamily,
   );
   drawText(
     ctx,
@@ -200,7 +201,7 @@ async function drawCharacterProp(
     size.characterPropTextFontColor,
     config.specialFontFamilies?.characterPropTextFontFamily ||
       config.fontFamily,
-    "right"
+    "right",
   );
   return;
 }
@@ -209,7 +210,7 @@ export async function drawReliquaries(
   ctx: SKRSContext2D,
   config: CardConfig,
   reliquaries: ReliquarySlots,
-  avatarId: number
+  avatarId: number,
 ) {
   let position = 0;
   const setNumMap: Map<number, number> = new Map();
@@ -252,7 +253,7 @@ export async function drawReliquaries(
         size.reliquarySetTextFontColor,
         config.specialFontFamilies?.reliquarySetTextFontFamily ||
           config.fontFamily,
-        "right"
+        "right",
       );
       setIndex++;
     }
@@ -266,7 +267,7 @@ async function drawReliquary(
   config: CardConfig,
   reliquary: Reliquary,
   avatarId: number,
-  position: number
+  position: number,
 ) {
   // reliquary image
   const imageX = size.reliquaryImageXList[position];
@@ -281,7 +282,7 @@ async function drawReliquary(
     imageY,
     size.reliquaryImageSize,
     size.reliquaryImageSize,
-    [8, 8, 8, 8]
+    [8, 8, 8, 8],
   );
   ctx.clip();
   await loadImageAndOffsetDraw(
@@ -292,7 +293,7 @@ async function drawReliquary(
     imageX,
     imageY,
     size.reliquaryImageSize,
-    size.reliquaryImageSize
+    size.reliquaryImageSize,
   );
 
   // main prop image
@@ -305,7 +306,7 @@ async function drawReliquary(
     mainPropImageX,
     mainPropImageY,
     size.reliquaryMainPropImageSize,
-    size.reliquaryMainPropImageSize
+    size.reliquaryMainPropImageSize,
   );
 
   // main prop text
@@ -324,7 +325,7 @@ async function drawReliquary(
     size.reliquaryMainPropTextFontColor,
     config.specialFontFamilies?.reliquaryMainPropTextFontFamily ||
       config.fontFamily,
-    "right"
+    "right",
   );
   ctx.stroke();
   ctx.restore();
@@ -337,7 +338,7 @@ async function drawReliquary(
       reliquary.subProps[i],
       i,
       imageX,
-      imageY
+      imageY,
     );
   }
   return;
@@ -349,7 +350,7 @@ async function drawReliquarySubProp(
   prop: FightProp,
   position: number,
   x: number,
-  y: number
+  y: number,
 ) {
   // sub prop image
   const imageX = x + size.reliquarySubPropRXList[position];
@@ -363,7 +364,7 @@ async function drawReliquarySubProp(
     imageX,
     imageY,
     size.reliquarySubPropImageSize,
-    size.reliquarySubPropImageSize
+    size.reliquarySubPropImageSize,
   );
 
   // sub prop text
@@ -377,7 +378,7 @@ async function drawReliquarySubProp(
     size.reliquarySubPropTextFontSize,
     size.reliquarySubPropTextFontColor,
     config.specialFontFamilies?.reliquarySubPropTextFontFamily ||
-      config.fontFamily
+      config.fontFamily,
   );
   return;
 }
@@ -397,7 +398,7 @@ function countSetNum(setNumMap: Map<number, number>, reliquaryId: number) {
 export async function drawWeapon(
   ctx: SKRSContext2D,
   config: CardConfig,
-  weapon: Weapon
+  weapon: Weapon,
 ) {
   // weapon name
   drawText(
@@ -408,7 +409,7 @@ export async function drawWeapon(
     size.weaponNameTextFontSize,
     size.weaponNameTextFontColor,
     config.specialFontFamilies?.weaponNameTextFontFamily || config.fontFamily,
-    "right"
+    "right",
   );
 
   // weapon image
@@ -420,7 +421,7 @@ export async function drawWeapon(
     size.weaponImageY,
     size.weaponImageSize,
     size.weaponImageSize,
-    [8, 8, 8, 8]
+    [8, 8, 8, 8],
   );
   ctx.clip();
   await loadImageAndDraw(
@@ -429,7 +430,7 @@ export async function drawWeapon(
     size.weaponImageX,
     size.weaponImageY,
     size.weaponImageSize,
-    size.weaponImageSize
+    size.weaponImageSize,
   );
   ctx.stroke();
   ctx.restore();
@@ -441,7 +442,7 @@ export async function drawWeapon(
     size.weaponMainPropImageX,
     size.weaponMainPropImageY,
     size.weaponPropImageSize,
-    size.weaponPropImageSize
+    size.weaponPropImageSize,
   );
   // weapon main prop text
   drawText(
@@ -452,7 +453,7 @@ export async function drawWeapon(
     size.weaponPropTextFontSize,
     size.weaponPropTextFontColor,
     config.specialFontFamilies?.weaponPropTextFontFamily || config.fontFamily,
-    "right"
+    "right",
   );
 
   if (weapon.subProp) {
@@ -463,7 +464,7 @@ export async function drawWeapon(
       size.weaponSubPropImageX,
       size.weaponSubPropImageY,
       size.weaponPropImageSize,
-      size.weaponPropImageSize
+      size.weaponPropImageSize,
     );
     // weapon sub prop text
     drawText(
@@ -474,7 +475,7 @@ export async function drawWeapon(
       size.weaponPropTextFontSize,
       size.weaponPropTextFontColor,
       config.specialFontFamilies?.weaponPropTextFontFamily || config.fontFamily,
-      "right"
+      "right",
     );
   }
 

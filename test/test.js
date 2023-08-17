@@ -9,14 +9,14 @@ const test = async () => {
   const meta = await fetch("https://enka.network/api/uid/101745173");
   const { uid, playerInfo, avatarInfoList } = await meta.json();
   const characterDataList = avatarInfoList.map((avatarInfo) =>
-    parseCharacterData(uid, playerInfo, avatarInfo)
+    parseCharacterData(uid, playerInfo, avatarInfo),
   );
   if (characterDataList.length > 0) {
     const cardWidth = cardConfig.width;
     const cardHeight = cardConfig.height;
     console.log(`query character total number: ${avatarInfoList.length}`);
     const canvasArr = await Promise.all(
-      characterDataList.map((i) => generateCard(i))
+      characterDataList.map((i) => generateCard(i)),
     );
     try {
       const rowNum = Math.min(canvasArr.length, 4);
@@ -37,7 +37,7 @@ const test = async () => {
       });
       fs.writeFileSync(
         path.resolve(__dirname, "test.png"),
-        canvas.toBuffer("image/png")
+        canvas.toBuffer("image/png"),
       );
       // too long url: spawn E2BIG
       // const url = canvas.toDataURL("image/png");

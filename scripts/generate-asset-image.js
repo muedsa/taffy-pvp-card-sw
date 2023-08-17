@@ -11,7 +11,7 @@ const rawImageDirPath = resolve(
   "asset",
   "image",
   "reliquary",
-  "raw"
+  "raw",
 );
 
 const colorComponentMinValue = 0;
@@ -77,9 +77,9 @@ async function generateImage(filename, colorKey, colorR, colorG, colorB) {
     resolve(
       rawImageDirPath,
       "..",
-      filename.slice(0, -4) + "_" + colorKey + ".png"
+      filename.slice(0, -4) + "_" + colorKey + ".png",
     ),
-    canvas.toBuffer("image/png")
+    canvas.toBuffer("image/png"),
   );
   return;
 }

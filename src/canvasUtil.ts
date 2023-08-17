@@ -7,7 +7,7 @@ export async function loadImageAndDraw(
   x: number,
   y: number,
   w?: number,
-  h?: number
+  h?: number,
 ) {
   if (!(await fileExists(path))) {
     throw new Error("not exists file: " + path);
@@ -27,7 +27,7 @@ export async function loadImageAndOffsetDraw(
   x: number,
   y: number,
   w?: number,
-  h?: number
+  h?: number,
 ) {
   if (!(await fileExists(path))) {
     throw new Error("not exists file: " + path);
@@ -53,7 +53,7 @@ export function drawText(
   fontSize: number,
   fontColor = "#ffffff",
   fontFamily = "",
-  textAlign: CanvasTextAlign = "left"
+  textAlign: CanvasTextAlign = "left",
 ) {
   ctx.textBaseline = "top";
   if (fontFamily.indexOf(" ") > -1) {

@@ -32,7 +32,7 @@ async function setCache(fileName: string, value: object | string) {
     fs.writeFile(
       getCacheFilePath(fileName),
       typeof value === "string" ? value : JSON.stringify(value),
-      { flag: "w" }
+      { flag: "w" },
     );
   try {
     await doWriteFile();
@@ -59,12 +59,12 @@ export async function updateCache(updateRemote = true) {
         await setCache(name, jsonString);
       } else {
         const meta = await fetch(
-          `https://raw.githubusercontent.com/zcWSR/taffy-pvp-card-ds/master/data/${name}.json`
+          `https://raw.githubusercontent.com/zcWSR/taffy-pvp-card-ds/master/data/${name}.json`,
         );
         logger.info(`fetching ${name}.json`);
         await setCache(name, (await meta.json()) as object);
       }
-    })()
+    })(),
   );
   loadingPromise = Promise.all(tasks);
   await loadingPromise;

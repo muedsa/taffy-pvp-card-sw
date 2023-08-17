@@ -123,7 +123,7 @@ function buildWeaponInfo(item: WeaponInfo) {
 export function parseCharacterData(
   uid: string,
   playerInfo: PlayerInfo,
-  avatarInfo: AvatarInfo
+  avatarInfo: AvatarInfo,
 ) {
   type EquipMap = Record<
     (typeof equipTypeMap)[keyof typeof equipTypeMap],
@@ -153,7 +153,7 @@ export function parseCharacterData(
       ? avatarInfo.talentIdList.length
       : 0,
     skills: Object.keys(avatarInfo.skillLevelMap).map(
-      (key) => avatarInfo.skillLevelMap[key]
+      (key) => avatarInfo.skillLevelMap[key],
     ),
     fightPropMap: avatarInfo.fightPropMap,
     reliquaries: {

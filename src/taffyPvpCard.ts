@@ -36,7 +36,7 @@ function initBackground(ctx: SKRSContext2D, character: Character): string {
 
 export async function generateCard(
   character: Character,
-  config: CardConfig = cardConfig
+  config: CardConfig = cardConfig,
 ): Promise<Canvas> {
   await checkCache();
   registerCustomFonts(config);

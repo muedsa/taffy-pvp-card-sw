@@ -86,7 +86,8 @@ async function drawCharacterProp(ctx, config, fightPropMap, propId, propPosition
     // prop text
     const propLabel = (0, util_1.getCharacterPropLoc)(propId, config.lang);
     const propValue = (0, util_1.getCharacterPropText)(propId, fightPropMap[propId]);
-    (0, canvasUtil_1.drawText)(ctx, propLabel, textX, textY, size.characterPropTextFontSize, size.characterPropTextFontColor, config.specialFontFamilies?.characterPropTextFontFamily || config.fontFamily);
+    (0, canvasUtil_1.drawText)(ctx, propLabel, textX, textY, size.characterPropTextFontSize, size.characterPropTextFontColor, config.specialFontFamilies?.characterPropTextFontFamily ||
+        config.fontFamily);
     (0, canvasUtil_1.drawText)(ctx, propValue, textEndX, textEndY, size.characterPropTextFontSize, size.characterPropTextFontColor, config.specialFontFamilies?.characterPropTextFontFamily ||
         config.fontFamily, "right");
     return;
