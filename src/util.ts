@@ -1,6 +1,6 @@
 import { constants } from "node:fs";
 import fs from "node:fs/promises";
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { getCache } from "./cache";
 import { backgroundColors } from "./data/colors";
 import {
