@@ -22,19 +22,19 @@
   "license": "MIT",
   "repository": "https://github.com/MUedsa/taffy-pvp-card-sw",
   "devDependencies": {
-    "@types/node": "^20.5.1",
+    "@types/node": "^20.5.7",
     "@types/node-fetch": "^2.6.4",
-    "@typescript-eslint/eslint-plugin": "^6.4.1",
-    "@typescript-eslint/parser": "^6.4.1",
-    "eslint": "^8.47.0",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-typescript": "^6.0.0-alpha.1",
-    "prettier": "3.0.2",
-    "typescript": "^5.1.6"
+    "prettier": "3.0.3",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@napi-rs/canvas": "^0.1.43",
+    "@napi-rs/canvas": "^0.1.44",
     "node-fetch": "^2.6.11 <3.0"
   }
 }
