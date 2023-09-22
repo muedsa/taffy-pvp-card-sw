@@ -48,10 +48,10 @@ type WeaponInfo = {
     };
 };
 type WeaponInfoMeta = WeaponInfo;
-type PlayerInfo = {
+export type PlayerInfo = {
     nickname: string;
 };
-type AvatarInfo = {
+export type AvatarInfo = {
     avatarId: number;
     propMap: {
         "4001": {
@@ -67,9 +67,9 @@ type AvatarInfo = {
     };
     equipList: Array<ReliquaryInfoMeta | WeaponInfoMeta>;
 };
-export declare function parseCharacterData(uid: string, playerInfo: PlayerInfo, avatarInfo: AvatarInfo): {
+export declare function parseCharacterData(uid: number, playerInfo: PlayerInfo, avatarInfo: AvatarInfo): {
     owner: {
-        uid: string;
+        uid: number;
         name: string;
     };
     id: number;

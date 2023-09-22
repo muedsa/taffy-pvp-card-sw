@@ -50,11 +50,11 @@ type WeaponInfo = {
 
 type WeaponInfoMeta = WeaponInfo;
 
-type PlayerInfo = {
+export type PlayerInfo = {
   nickname: string;
 };
 
-type AvatarInfo = {
+export type AvatarInfo = {
   avatarId: number;
   propMap: {
     "4001": {
@@ -121,7 +121,7 @@ function buildWeaponInfo(item: WeaponInfo) {
 }
 
 export function parseCharacterData(
-  uid: string,
+  uid: number,
   playerInfo: PlayerInfo,
   avatarInfo: AvatarInfo,
 ) {
