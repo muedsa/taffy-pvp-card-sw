@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getReliquarySetName = exports.getReliquariesLoc = exports.getReliquarySetId = exports.getWeaponName = exports.getWeaponImagePath = exports.getLoc = exports.getFightPropText = exports.getCharacterPropText = exports.getReliquaryPropImagePath = exports.getReliquaryImagePath = exports.getCharacterMasterElementDamageProp = exports.getCharacterPropLoc = exports.getFightPropLoc = exports.getCharacterPropImagePath = exports.getCharacterImagePath = exports.getBgColor = exports.getCharacterElement = exports.fileExists = void 0;
 const node_fs_1 = require("node:fs");
 const promises_1 = __importDefault(require("node:fs/promises"));
-const path_1 = require("path");
+const node_path_1 = require("node:path");
 const cache_1 = require("./cache");
 const colors_1 = require("./data/colors");
 const damageProp_1 = require("./data/damageProp");
 const imagePath_1 = require("./data/imagePath");
-const assetPath = (0, path_1.resolve)(__dirname, "../asset");
+const assetPath = (0, node_path_1.resolve)(__dirname, "../asset");
 async function fileExists(path) {
     try {
         await promises_1.default.access(path, node_fs_1.constants.F_OK);

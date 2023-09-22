@@ -14,6 +14,7 @@ import {
   drawWeapon,
 } from "./draw";
 import { checkCache } from "./cache";
+import GenshinError from "./genshinError";
 
 const registerFontSet = new Set<string>();
 
@@ -34,6 +35,24 @@ function initBackground(ctx: SKRSContext2D, character: Character): string {
   return color;
 }
 
+type AnyFunction = (...args: any[]) => any;
+
+const withGenshinError = <T extends AnyFunction>(fn: T, message: string): T => {
+  return (async (...args) => {
+    try {
+      return await fn(...args);
+    } catch (e) {
+      throw new GenshinError(message, { origin: e });
+    }
+  }) as T;
+};
+
+
+const catchErrorDrawCharacter = withGenshinError(drawCharacter, "角色渲染失败，请重试");
+const catchErrorDrawCharacterProps = withGenshinError(drawCharacterProps, "角色属性渲染失败，请重试");
+const catchErrorDrawReliquaries = withGenshinError(drawReliquaries, "圣遗物渲染失败，请重试");
+const catchErrorDrawWeapon = withGenshinError(drawWeapon, "武器渲染失败，请重试");
+
 export async function generateCard(
   character: Character,
   config: CardConfig = cardConfig,
@@ -46,9 +65,9 @@ export async function generateCard(
   ctx.imageSmoothingQuality = "high";
   ctx.scale(config.width / cardWidth, config.height / cardHeight);
   initBackground(ctx, character);
-  await drawCharacter(ctx, config, character);
-  await drawCharacterProps(ctx, config, character);
-  await drawReliquaries(ctx, config, character.reliquaries, character.id);
-  await drawWeapon(ctx, config, character.weapon);
+  await catchErrorDrawCharacter(ctx, config, character);
+  await catchErrorDrawCharacterProps(ctx, config, character);
+  await catchErrorDrawReliquaries(ctx, config, character.reliquaries, character.id);
+  await catchErrorDrawWeapon(ctx, config, character.weapon);
   return canvas;
 }

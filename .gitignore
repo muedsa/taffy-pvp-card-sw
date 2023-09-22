@@ -138,5 +138,6 @@ out
 
 test/test.png
 taffy_pvp_card_cache/
+functions/lib
 
 .DS_Store
