@@ -47,11 +47,22 @@ const withGenshinError = <T extends AnyFunction>(fn: T, message: string): T => {
   }) as T;
 };
 
-
-const catchErrorDrawCharacter = withGenshinError(drawCharacter, "角色渲染失败，请重试");
-const catchErrorDrawCharacterProps = withGenshinError(drawCharacterProps, "角色属性渲染失败，请重试");
-const catchErrorDrawReliquaries = withGenshinError(drawReliquaries, "圣遗物渲染失败，请重试");
-const catchErrorDrawWeapon = withGenshinError(drawWeapon, "武器渲染失败，请重试");
+const catchErrorDrawCharacter = withGenshinError(
+  drawCharacter,
+  "角色渲染失败，请重试",
+);
+const catchErrorDrawCharacterProps = withGenshinError(
+  drawCharacterProps,
+  "角色属性渲染失败，请重试",
+);
+const catchErrorDrawReliquaries = withGenshinError(
+  drawReliquaries,
+  "圣遗物渲染失败，请重试",
+);
+const catchErrorDrawWeapon = withGenshinError(
+  drawWeapon,
+  "武器渲染失败，请重试",
+);
 
 export async function generateCard(
   character: Character,
@@ -67,7 +78,12 @@ export async function generateCard(
   initBackground(ctx, character);
   await catchErrorDrawCharacter(ctx, config, character);
   await catchErrorDrawCharacterProps(ctx, config, character);
-  await catchErrorDrawReliquaries(ctx, config, character.reliquaries, character.id);
+  await catchErrorDrawReliquaries(
+    ctx,
+    config,
+    character.reliquaries,
+    character.id,
+  );
   await catchErrorDrawWeapon(ctx, config, character.weapon);
   return canvas;
 }

@@ -33,9 +33,13 @@ class GenshinService {
 
   async getCharaData(uid: number) {
     logger.info(`fetch genshin player(${uid}) character data...`);
-    const time = Date.now()
+    const time = Date.now();
     const resp = await fetch(`https://enka.network/api/uid/${uid}`);
-    logger.info(`fetch genshin player(${uid}) character data complete in ${Date.now() - time}ms`);
+    logger.info(
+      `fetch genshin player(${uid}) character data complete in ${
+        Date.now() - time
+      }ms`,
+    );
     if (resp.ok) {
       type Data = { playerInfo: PlayerInfo; avatarInfoList: AvatarInfo[] };
       let data: Data;
@@ -45,7 +49,7 @@ class GenshinService {
         logger.info(
           `fetch genshin player(${uid}) character error, unexpected error`,
         );
-        throw new GenshinError("数据解析失败，请重试", {origin: e});
+        throw new GenshinError("数据解析失败，请重试", { origin: e });
       }
       const { playerInfo, avatarInfoList } = data;
       if (!avatarInfoList?.length) {
@@ -59,17 +63,17 @@ class GenshinService {
     logger.info(`fetch genshin player(${uid}) character error, code ${code}`);
     switch (code) {
       case 400:
-        throw new GenshinError("UID 格式错误", {code});
+        throw new GenshinError("UID 格式错误", { code });
       case 404:
-        throw new GenshinError("玩家不存在（MHY 服务器说的）", {code});
+        throw new GenshinError("玩家不存在（MHY 服务器说的）", { code });
       case 424:
-        throw new GenshinError("系统维护中，再等等吧", {code});
+        throw new GenshinError("系统维护中，再等等吧", { code });
       case 429:
-        throw new GenshinError("请求频率过高，请稍后再试吧", {code});
+        throw new GenshinError("请求频率过高，请稍后再试吧", { code });
       case 500:
       case 503:
       default:
-        throw new GenshinError("出错了，但不知道为什么", {code});
+        throw new GenshinError("出错了，但不知道为什么", { code });
     }
   }
 
