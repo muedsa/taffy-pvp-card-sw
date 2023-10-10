@@ -55,7 +55,7 @@ export function drawText(
   fontFamily = "",
   textAlign: CanvasTextAlign = "left",
 ) {
-  ctx.textBaseline = "top";
+  ctx.textBaseline = "middle";
   if (fontFamily.indexOf(" ") > -1) {
     ctx.font = `${fontSize}px "${fontFamily}"`;
   } else {
@@ -63,5 +63,5 @@ export function drawText(
   }
   ctx.fillStyle = fontColor;
   ctx.textAlign = textAlign;
-  ctx.fillText(text, x, y);
+  ctx.fillText(text, x, y + fontSize / 2);
 }

@@ -20,11 +20,11 @@ export const cardConfig: CardConfig = {
   width: cardWidth,
   height: cardHeight,
   lang: "zh-CN",
-  fontFamily: "Noto Sans SC",
+  fontFamily: "汉仪文黑-85W",
   customFonts: [
     {
-      fontPath: resolve(__dirname, "../asset/font/NotoSansSC-Regular.otf"),
-      fontFamily: "Noto Sans SC",
+      fontPath: resolve(__dirname, "../asset/font/HYWenHei-85W.ttf"),
+      fontFamily: "汉仪文黑-85W",
     },
   ],
 };

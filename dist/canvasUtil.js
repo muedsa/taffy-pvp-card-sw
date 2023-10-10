@@ -32,7 +32,7 @@ async function loadImageAndOffsetDraw(ctx, path, offsetX, offsetY, x, y, w, h) {
 }
 exports.loadImageAndOffsetDraw = loadImageAndOffsetDraw;
 function drawText(ctx, text, x, y, fontSize, fontColor = "#ffffff", fontFamily = "", textAlign = "left") {
-    ctx.textBaseline = "top";
+    ctx.textBaseline = "middle";
     if (fontFamily.indexOf(" ") > -1) {
         ctx.font = `${fontSize}px "${fontFamily}"`;
     }
@@ -41,6 +41,6 @@ function drawText(ctx, text, x, y, fontSize, fontColor = "#ffffff", fontFamily =
     }
     ctx.fillStyle = fontColor;
     ctx.textAlign = textAlign;
-    ctx.fillText(text, x, y);
+    ctx.fillText(text, x, y + fontSize / 2);
 }
 exports.drawText = drawText;
