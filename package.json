@@ -10,7 +10,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "prettier --write . & gulp",
-    "test": "gulp & prettier --write ./test & node test/test",
+    "test": "gulp & prettier --write ./test & node test/image-test & node test/test",
     "prettier": "prettier --write .",
     "build-asset-image": "gulp & node ./scripts/generate-asset-image & gulp"
   },

@@ -6,7 +6,7 @@ const fetch = require("node-fetch");
 const { generateCard, cardConfig, parseCharacterData } = require("../dist");
 
 const test = async () => {
-  const meta = await fetch("https://enka.network/api/uid/101745173");
+  const meta = await fetch("https://profile.microgg.cn/api/uid/101745173");
   const { uid, playerInfo, avatarInfoList } = await meta.json();
   const characterDataList = avatarInfoList.map((avatarInfo) =>
     parseCharacterData(uid, playerInfo, avatarInfo),
