@@ -3,7 +3,7 @@ const { getCache, checkCache } = require("../dist/cache");
 const { getCharacterImagePath } = require("../dist/util");
 
 const imageTest = async () => {
-  await checkCache()
+  await checkCache();
   const characters = getCache("characters");
   const avatarIds = Object.keys(characters);
   avatarIds.forEach((avatarId) => {
