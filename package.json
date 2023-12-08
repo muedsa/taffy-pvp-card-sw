@@ -22,7 +22,7 @@
   "license": "MIT",
   "repository": "https://github.com/MUedsa/taffy-pvp-card-sw",
   "devDependencies": {
-    "@types/node": "^20.10.3",
+    "@types/node": "^20.10.4",
     "@types/node-fetch": "^2.6.4",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
