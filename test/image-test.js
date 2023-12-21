@@ -1,9 +1,9 @@
 const { accessSync, constants } = require("node:fs");
-const { getCache, checkCache } = require("../dist/cache");
+const { getCache, updateCache } = require("../dist/cache");
 const { getCharacterImagePath } = require("../dist/util");
 
 const imageTest = async () => {
-  await checkCache();
+  await updateCache(true);
   const characters = getCache("characters");
   const avatarIds = Object.keys(characters);
   avatarIds.forEach((avatarId) => {
