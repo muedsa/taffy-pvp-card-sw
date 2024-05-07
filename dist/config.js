@@ -11,7 +11,7 @@ exports.cardHeight = size_1.cardPadding * 2 +
 exports.cardConfig = {
     width: exports.cardWidth,
     height: exports.cardHeight,
-    lang: "zh-CN",
+    lang: "zh-cn",
     fontFamily: "汉仪文黑-85W",
     customFonts: [
         {

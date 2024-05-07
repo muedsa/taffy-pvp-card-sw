@@ -45,8 +45,8 @@ function getScaledColorComponent(colorComponent, scaleFactor) {
   return scaledValue > colorComponentMaxValue
     ? colorComponentMaxValue
     : scaledValue < colorComponentMinValue
-    ? colorComponentMinValue
-    : scaledValue;
+      ? colorComponentMinValue
+      : scaledValue;
 }
 
 async function generateImage(filename, colorKey, colorR, colorG, colorB) {

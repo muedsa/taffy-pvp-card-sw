@@ -44,7 +44,7 @@ export interface FightProp {
 export interface CardConfig {
     width: number;
     height: number;
-    lang: "en" | "ru" | "vi" | "th" | "pt" | "kr" | "jp" | "id" | "fr" | "es" | "de" | "zh-CN" | "zh-TW" | "it" | "tr";
+    lang: "en" | "ru" | "vi" | "th" | "pt" | "kr" | "jp" | "id" | "fr" | "es" | "de" | "zh-cn" | "zh-tw" | "it" | "tr";
     fontFamily: string;
     specialFontFamilies?: CardFontConfig;
     customFonts?: CustomFonts[];

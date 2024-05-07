@@ -19,7 +19,7 @@ export const cardHeight =
 export const cardConfig: CardConfig = {
   width: cardWidth,
   height: cardHeight,
-  lang: "zh-CN",
+  lang: "zh-cn",
   fontFamily: "汉仪文黑-85W",
   customFonts: [
     {

@@ -83,8 +83,8 @@ export interface CardConfig {
     | "fr"
     | "es"
     | "de"
-    | "zh-CN"
-    | "zh-TW"
+    | "zh-cn"
+    | "zh-tw"
     | "it"
     | "tr";
   fontFamily: string;
