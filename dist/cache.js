@@ -3,7 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkCache = exports.updateCache = exports.getCache = void 0;
+exports.getCache = getCache;
+exports.updateCache = updateCache;
+exports.checkCache = checkCache;
 const node_fetch_1 = __importDefault(require("node-fetch"));
 const promises_1 = __importDefault(require("node:fs/promises"));
 const config_1 = require("./config");
@@ -23,7 +25,6 @@ const getCacheFilePath = (fileName) => `${config_1.globalConfig.cacheDir}/${file
 function getCache(fileName) {
     return cacheMap.get(fileName);
 }
-exports.getCache = getCache;
 async function setCache(fileName, value) {
     const doWriteFile = () => promises_1.default.writeFile(getCacheFilePath(fileName), typeof value === "string" ? value : JSON.stringify(value), { flag: "w" });
     try {
@@ -60,7 +61,6 @@ async function updateCache(updateRemote = true) {
     await loadingPromise;
     loadingPromise = null;
 }
-exports.updateCache = updateCache;
 // 每次 generateCard 都会执行，如果此时正在 updateCache 则会等待
 async function checkCache() {
     if (loadingPromise)
@@ -69,4 +69,3 @@ async function checkCache() {
         await updateCache(false);
     }
 }
-exports.checkCache = checkCache;

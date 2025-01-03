@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.drawText = exports.loadImageAndOffsetDraw = exports.loadImageAndDraw = void 0;
+exports.loadImageAndDraw = loadImageAndDraw;
+exports.loadImageAndOffsetDraw = loadImageAndOffsetDraw;
+exports.drawText = drawText;
 const canvas_1 = require("@napi-rs/canvas");
 const util_1 = require("./util");
 async function loadImageAndDraw(ctx, path, x, y, w, h) {
@@ -13,7 +15,6 @@ async function loadImageAndDraw(ctx, path, x, y, w, h) {
     // ctx.fillRect(x, y, w || image.width, h || image.height);
     return;
 }
-exports.loadImageAndDraw = loadImageAndDraw;
 async function loadImageAndOffsetDraw(ctx, path, offsetX, offsetY, x, y, w, h) {
     if (!(await (0, util_1.fileExists)(path))) {
         throw new Error("not exists file: " + path);
@@ -30,7 +31,6 @@ async function loadImageAndOffsetDraw(ctx, path, offsetX, offsetY, x, y, w, h) {
     ctx.drawImage(image, sx, sy, sw, sh, x, y, dw, dh);
     return;
 }
-exports.loadImageAndOffsetDraw = loadImageAndOffsetDraw;
 function drawText(ctx, text, x, y, fontSize, fontColor = "#ffffff", fontFamily = "", textAlign = "left") {
     ctx.textBaseline = "middle";
     if (fontFamily.indexOf(" ") > -1) {
@@ -43,4 +43,3 @@ function drawText(ctx, text, x, y, fontSize, fontColor = "#ffffff", fontFamily =
     ctx.textAlign = textAlign;
     ctx.fillText(text, x, y + fontSize / 2);
 }
-exports.drawText = drawText;

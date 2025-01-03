@@ -23,7 +23,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.drawWeapon = exports.drawReliquaries = exports.drawCharacterProps = exports.drawCharacter = void 0;
+exports.drawCharacter = drawCharacter;
+exports.drawCharacterProps = drawCharacterProps;
+exports.drawReliquaries = drawReliquaries;
+exports.drawWeapon = drawWeapon;
 const util_1 = require("./util");
 const canvasUtil_1 = require("./canvasUtil");
 const size = __importStar(require("./size"));
@@ -58,7 +61,6 @@ async function drawCharacter(ctx, config, character) {
     }
     return;
 }
-exports.drawCharacter = drawCharacter;
 async function drawCharacterProps(ctx, config, character) {
     const baseProps = [2000, 2001, 2002, 20, 22, 23, 28];
     for (let i = 0; i < baseProps.length; i++) {
@@ -67,7 +69,6 @@ async function drawCharacterProps(ctx, config, character) {
     await drawCharacterProp(ctx, config, character.fightPropMap, (0, util_1.getCharacterMasterElementDamageProp)(character.id), baseProps.length);
     return;
 }
-exports.drawCharacterProps = drawCharacterProps;
 async function drawCharacterProp(ctx, config, fightPropMap, propId, propPosition) {
     const imageX = size.characterPropImageX;
     const imageY = size.characterPropImageY +
@@ -130,7 +131,6 @@ async function drawReliquaries(ctx, config, reliquaries, avatarId) {
     });
     return;
 }
-exports.drawReliquaries = drawReliquaries;
 async function drawReliquary(ctx, config, reliquary, avatarId, position) {
     // reliquary image
     const imageX = size.reliquaryImageXList[position];
@@ -213,4 +213,3 @@ async function drawWeapon(ctx, config, weapon) {
     }
     return;
 }
-exports.drawWeapon = drawWeapon;

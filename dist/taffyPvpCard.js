@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateCard = void 0;
+exports.generateCard = generateCard;
 const canvas_1 = require("@napi-rs/canvas");
 const util_1 = require("./util");
 const config_1 = require("./config");
@@ -56,4 +56,3 @@ async function generateCard(character, config = config_1.cardConfig) {
     await catchErrorDrawWeapon(ctx, config, character.weapon);
     return canvas;
 }
-exports.generateCard = generateCard;

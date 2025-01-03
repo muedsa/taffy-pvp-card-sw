@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseCharacterData = void 0;
+exports.parseCharacterData = parseCharacterData;
 const equipTypeMap = {
     EQUIP_BRACER: "flower",
     EQUIP_NECKLACE: "feather",
@@ -88,4 +88,3 @@ function parseCharacterData(uid, playerInfo, avatarInfo) {
         weapon: buildWeaponInfo(weapon),
     };
 }
-exports.parseCharacterData = parseCharacterData;
